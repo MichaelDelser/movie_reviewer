@@ -1,0 +1,7 @@
+{
+  "/api": {
+    "target": "https://safe-bastion-69310.herokuapp.com",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

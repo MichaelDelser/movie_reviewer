@@ -11,7 +11,18 @@ const reportsRoutes = require('./routes/reports');
 const app = express();
 
 app.use(bodyParser.json());
-app.use(cors());
+
+const corsOptions = {
+    origin: ['http://localhost:4200', 'https://*.stackblitz.io', 'https://stackblitz.com', 'https://stackblitzstartersqxjqmt-4eok--4200--70dbe416.local-credentialless.webcontainer.io'],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'X-Requested-With', 'Accept']
+};
+
+app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
 
 // MongoDB connection
 connectDB();
