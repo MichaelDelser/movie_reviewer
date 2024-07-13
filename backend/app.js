@@ -12,14 +12,13 @@ const app = express();
 
 app.use(bodyParser.json());
 
-const corsOptions = {
-    origin: ['http://localhost:4200', 'https://*.stackblitz.io', 'https://stackblitz.com', 'https://stackblitzstartersqxjqmt-4eok--4200--70dbe416.local-credentialless.webcontainer.io'],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'X-Requested-With', 'Accept']
-};
+const corsOptions =
 
-app.use(cors(corsOptions));
+app.use(cors({
+        origin: '*',
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+        credentials: true,
+}));
 
 // Handle preflight requests
 app.options('*', cors(corsOptions));
