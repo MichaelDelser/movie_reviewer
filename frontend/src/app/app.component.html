@@ -1,3 +1,4 @@
+<!-- src/app/app.component.html -->
 <mat-toolbar color="primary">
   <span>My Review App</span>
   <span class="spacer"></span>
@@ -12,5 +13,6 @@
   <a mat-button *ngIf="authService.isAuthenticated()" routerLink="/protected">Protected Page</a>
 </mat-toolbar>
 <div class="content">
+  <app-search-bar></app-search-bar>
   <router-outlet></router-outlet>
 </div>

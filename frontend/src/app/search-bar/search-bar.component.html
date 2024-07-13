@@ -1,0 +1,17 @@
+<!-- src/app/search-bar/search-bar.component.html -->
+<div class="search-bar">
+  <input
+    type="text"
+    [(ngModel)]="query"
+    placeholder="Search for a movie..."
+    (keyup.enter)="onSearch()"
+  />
+  <button (click)="onSearch()">Search</button>
+</div>
+<div class="movie-results">
+  <div *ngFor="let movie of movies" class="movie-card">
+    <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
+    <h3>{{ movie.title }}</h3>
+    <p>{{ movie.release_date | date }}</p>
+  </div>
+</div>
