@@ -1,11 +1,11 @@
 // Variables
-$primary-color: #ff6b6b;
-$secondary-color: #ffb6b6;
-$background-gradient: linear-gradient(135deg, #6B73FF 0%, #000DFF 100%);
+$primary-color: #6c757d; // Muted greyish color
+$secondary-color: #adb5bd; // Light muted grey
+$background-gradient: linear-gradient(135deg, #dfe6e9 0%, #b2bec3 100%); // Muted gradient
 $font-family: 'Roboto', sans-serif;
 $white: #fff;
 $black: #000;
-$text-color: #fff;
+$text-color: #2d3436; // Dark grey
 $box-shadow-light: rgba(0, 0, 0, 0.1);
 $box-shadow-dark: rgba(0, 0, 0, 0.2);
 
@@ -45,8 +45,8 @@ a {
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0.5em 0;
-  color: $secondary-color;
-  text-shadow: 2px 2px $black;
+  color: $primary-color;
+  text-shadow: 1px 1px $white;
 }
 
 p {
@@ -71,7 +71,7 @@ button {
 // Card styles
 .card {
   background: $white;
-  color: $black;
+  color: $text-color;
   border-radius: 15px;
   @include box-shadow($box-shadow-light);
   overflow: hidden;
