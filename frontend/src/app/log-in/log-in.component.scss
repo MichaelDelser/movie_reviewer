@@ -1,10 +1,67 @@
-mat-card {
-  max-width: 400px;
-  margin: 2rem auto;
-  padding: 1rem;
+/* src/app/log-in/log-in.component.scss */
+.login-container {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.1em;
+  margin-bottom: 20px;
+
+  a {
+    color: #00bcd4;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+mat-form-field.full-width {
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 mat-form-field {
-  width: 100%;
-  margin-bottom: 1rem;
+  mat-label {
+    font-size: 1.1em;
+  }
+
+  input {
+    font-size: 1.1em;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    font-size: 1.1em;
+    padding: 10px 20px;
+  }
+
+  .reset-password {
+    color: #00bcd4;
+    text-decoration: none;
+  }
+
+  .reset-password:hover {
+    text-decoration: underline;
+  }
+}
+
+.error-message {
+  color: red;
+  margin-top: 20px;
+  font-size: 1em;
 }
