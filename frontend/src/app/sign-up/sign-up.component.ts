@@ -1,50 +1,52 @@
+// src/app/sign-up/sign-up.component.ts
 import { Component } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import {Router, RouterLink} from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss'],
   standalone: true,
   imports: [
     CommonModule,
     FormsModule,
-    MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
-  ]
+    MatButtonModule,
+    RouterLink
+  ],
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
   username: string = '';
   password: string = '';
-  errorMessage: string = '';
+  passwordConfirm: string = '';
+  passwordMismatch: boolean = false;
+  errorMessage: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  signUp(): void {
-    this.authService.signUp(this.username, this.password).subscribe({
-      next: () => {
-        this.authService.logIn(this.username, this.password).subscribe({
-          next: (response) => {
-            this.authService.setToken(response.token);
-            this.router.navigate(['/home']);  // Navigate to the home screen
-          },
-          error: (error) => {
-            this.errorMessage = error;
-          }
-        });
+  signUp() {
+    this.passwordMismatch = this.password !== this.passwordConfirm;
+
+    if (this.passwordMismatch) {
+      this.errorMessage = null;
+      return;
+    }
+
+    this.authService.signUp(this.username, this.password).subscribe(
+      response => {
+        this.authService.setToken(response.token, this.username);
+        this.router.navigate(['/home']);
       },
-      error: (error) => {
-        this.errorMessage = error;
+      error => {
+        this.errorMessage = error; // Assuming error is a string message from the server
       }
-    });
+    );
   }
 }

@@ -32,7 +32,7 @@ export class LogInComponent {
   logIn(): void {
     this.authService.logIn(this.username, this.password).subscribe({
       next: (response) => {
-        this.authService.setToken(response.token);
+        this.authService.setToken(response.token, this.username);
         this.router.navigate(['/home']);  // Navigate to the home screen
       },
       error: (error) => {

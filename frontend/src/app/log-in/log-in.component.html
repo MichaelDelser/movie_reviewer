@@ -2,8 +2,8 @@
 <div class="login-container">
   <h1>Login to your account</h1>
   <p>
-    In order to use the editing and rating capabilities of TMDB, as well as get personal recommendations you will need to login to your account. If you do not have an account, registering for an account is free and simple.
-    <a href="#">Click here</a> to get started.
+    In order to use the editing and rating capabilities of MovieReviewer, as well as get personal recommendations you will need to login to your account. If you do not have an account, registering for an account is free and simple.
+    <a href="/signup">Click here</a> to get started.
   </p>
   <form (ngSubmit)="logIn()">
     <mat-form-field appearance="outline" class="full-width">
@@ -16,7 +16,6 @@
     </mat-form-field>
     <div class="actions">
       <button mat-raised-button color="primary" type="submit">Login</button>
-      <a href="#" class="reset-password">Reset password</a>
     </div>
   </form>
   <div *ngIf="errorMessage" class="error-message">

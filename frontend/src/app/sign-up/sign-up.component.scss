@@ -1,10 +1,80 @@
-mat-card {
-  max-width: 400px;
-  margin: 2rem auto;
-  padding: 1rem;
+/* src/app/sign-up/sign-up.component.scss */
+.signup-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #f9f9f9;
 }
 
-mat-form-field {
-  width: 100%;
-  margin-bottom: 1rem;
+.benefits {
+  flex: 1;
+  padding: 20px;
+  background-color: #00bcd4;
+  color: white;
+  border-radius: 8px;
+  margin-right: 20px;
+
+  h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
+  }
+}
+
+.signup-form {
+  flex: 2;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+  }
+
+  .full-width {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    button {
+      margin-right: 20px;
+    }
+
+    a {
+      color: #00bcd4;
+      text-decoration: none;
+      font-size: 1.1em;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .error-message {
+    color: red;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+  }
 }

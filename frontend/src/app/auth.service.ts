@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import {environment} from "../environments/environment";
+import { environment } from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = environment.apiUrl; //'http://localhost:3000/auth'; //locally hosted server for testing
+  private apiUrl = environment.apiUrl;
   private token: string | null = null;
+  private username: string | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -27,22 +28,30 @@ export class AuthService {
       );
   }
 
-  setToken(token: string): void {
+  setToken(token: string, username: string): void {
     this.token = token;
+    this.username = username;
     localStorage.setItem('token', token);
+    localStorage.setItem('username', username);
   }
 
   getToken(): string | null {
     return this.token || localStorage.getItem('token');
   }
 
+  getUsername(): string | null {
+    return this.username || localStorage.getItem('username');
+  }
+
   isAuthenticated(): boolean {
-    return !!this.token;
+    return !!this.getToken();
   }
 
   logout(): void {
     this.token = null;
+    this.username = null;
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {

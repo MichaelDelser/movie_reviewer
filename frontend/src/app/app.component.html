@@ -1,16 +1,22 @@
 <!-- src/app/app.component.html -->
 <mat-toolbar color="primary">
   <a mat-button routerLink="/home">Home</a>
+  <a mat-button *ngIf="authService.isAuthenticated()" routerLink="/protected">Protected Page</a>
   <span class="spacer"></span>
   <ng-container *ngIf="!authService.isAuthenticated(); else loggedIn">
     <a mat-button routerLink="/login">Log In</a>
     <a mat-button routerLink="/signup">Sign Up</a>
   </ng-container>
   <ng-template #loggedIn>
-    <a mat-button (click)="logout()">Log Out</a>
+    <div class="dropdown" (mouseover)="toggleDropdown(true)" (mouseout)="toggleDropdown(false)">
+      <span mat-button>{{ getUsername() }}</span>
+      <div class="dropdown-content" [class.show]="dropdownVisible">
+        <a mat-button routerLink="/protected">Protected Page</a>
+        <a mat-button (click)="logout()">Logout</a>
+      </div>
+    </div>
   </ng-template>
-  <a mat-button *ngIf="authService.isAuthenticated()" routerLink="/protected">Protected Page</a>
 </mat-toolbar>
-<div class="content">
+<div class="app-container">
   <router-outlet></router-outlet>
 </div>

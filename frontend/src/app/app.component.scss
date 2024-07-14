@@ -8,12 +8,46 @@ mat-toolbar {
   justify-content: space-between;
   align-items: center;
 
-  a[mat-button] {
+  a[mat-button], span[mat-button] {
+    color: black;
     text-transform: uppercase;
     margin: 0 8px;
-    font-size: 1.2em;
+    font-size: 1.2em; /* Increase font size */
   }
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0;
+    flex-direction: column; /* Ensure items are positioned vertically */
+    text-align: left; /* Align text to the left */
+
+    a[mat-button] {
+      text-align: left;
+      width: 100%;
+      color: black; /* Ensure the text is visible */
+    }
+
+    a[mat-button]:hover {
+      background-color: #ddd;
+    }
+  }
+
+  .show {
+    display: flex; /* Use flex to enable column layout */
+    flex-direction: column;
+  }
+}
+
 .content {
   padding: 20px;
 }
