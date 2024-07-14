@@ -1,29 +1,37 @@
 const mongoose = require('mongoose');
-const { isEmail } = require('validator');
+const bcrypt = require('bcryptjs');
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: [true, 'Username is required'],
-    unique: [true, 'User is not unique'],
-    index: true,
-    minlength: [3, 'Username must be at least 3 characters long'],
-    maxlength: [30, 'Username cannot exceed 30 characters']
+    required: true,
+    unique: true
   },
   password: {
     type: String,
-    required: [true, 'Password is required'],
-    minlength: [6, 'Password must be at least 6 characters long']
+    required: true
   },
-  /*email: {
+  role: {
     type: String,
-    required: [true, 'Email is required'],
-    unique: true,
-    index: true,
-    validate: [isEmail, 'Please enter a valid email address']
-  },
-  created_at: { type: Date, default: Date.now },
-  updated_at: { type: Date, default: Date.now }*/
+    default: 'user'
+  }
 });
 
-module.exports = mongoose.model('User', userSchema);
+// Static method to find user by credentials
+UserSchema.statics.findByCredentials = async (username, password) => {
+  const user = await User.findOne({ username });
+  if (!user) {
+    throw new Error('Invalid login credentials');
+  }
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    throw new Error('Invalid login credentials');
+  }
+
+  return user;
+};
+
+const User = mongoose.model('User', UserSchema);
+
+module.exports = User;

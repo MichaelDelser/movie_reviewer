@@ -1,7 +1,6 @@
 <!-- src/app/app.component.html -->
 <mat-toolbar color="primary">
   <a mat-button routerLink="/home">Home</a>
-  <a mat-button *ngIf="authService.isAuthenticated()" routerLink="/protected">Protected Page</a>
   <span class="spacer"></span>
   <ng-container *ngIf="!authService.isAuthenticated(); else loggedIn">
     <a mat-button routerLink="/login">Log In</a>

@@ -1,4 +1,3 @@
-// auth.js
 const express = require('express');
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
@@ -16,7 +15,7 @@ router.post('/signup', [
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { username, password } = req.body;
+  const { username, password, role = 'user' } = req.body; // Include role with default 'user'
 
   try {
     let user = await User.findOne({ username });
@@ -24,18 +23,18 @@ router.post('/signup', [
       return res.status(400).json({ msg: 'User already exists' });
     }
 
-    user = new User({ username, password });
+    user = new User({ username, password, role });
 
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(password, salt);
 
     await user.save();
 
-    const payload = { user: { id: user.id } };
+    const payload = { user: { id: user.id, role: user.role } };
 
-    jwt.sign(payload, 'secret', { expiresIn: 360000 }, (err, token) => {
+    jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 360000 }, (err, token) => {
       if (err) throw err;
-      res.json({ token });
+      res.json({ token, username: user.username, role: user.role });
     });
   } catch (err) {
     console.error(err.message);
@@ -56,7 +55,7 @@ router.post('/login', [
   const { username, password } = req.body;
 
   try {
-    let user = await User.findOne({ username });
+    const user = await User.findOne({ username });
     if (!user) {
       return res.status(400).json({ msg: 'Invalid Credentials' });
     }
@@ -66,11 +65,11 @@ router.post('/login', [
       return res.status(400).json({ msg: 'Invalid Credentials' });
     }
 
-    const payload = { user: { id: user.id } };
+    const payload = { user: { id: user.id, role: user.role } };
 
-    jwt.sign(payload, 'secret', { expiresIn: 360000 }, (err, token) => {
+    jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 360000 }, (err, token) => {
       if (err) throw err;
-      res.json({ token });
+      res.json({ token, username: user.username, role: user.role });
     });
   } catch (err) {
     console.error(err.message);

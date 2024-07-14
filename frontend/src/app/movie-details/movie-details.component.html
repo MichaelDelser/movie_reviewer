@@ -1,0 +1,17 @@
+<div *ngIf="isMovie && movie">
+  <h2>{{ movie.title }}</h2>
+  <p>{{ movie.overview }}</p>
+  <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+  <p><strong>Rating:</strong> {{ movie.vote_average }}</p>
+  <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
+  <!-- Add more movie details as needed -->
+</div>
+
+<div *ngIf="!isMovie && tvShow">
+  <h2>{{ tvShow.name }}</h2>
+  <p>{{ tvShow.overview }}</p>
+  <p><strong>First Air Date:</strong> {{ tvShow.first_air_date }}</p>
+  <p><strong>Rating:</strong> {{ tvShow.vote_average }}</p>
+  <img [src]="'https://image.tmdb.org/t/p/w500' + tvShow.poster_path" alt="{{ tvShow.name }}">
+  <!-- Add more TV show details as needed -->
+</div>
