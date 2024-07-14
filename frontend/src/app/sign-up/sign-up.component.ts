@@ -41,7 +41,6 @@ export class SignUpComponent {
 
     this.authService.signUp(this.username, this.password).subscribe(
       response => {
-        this.authService.setToken(response.token, this.username);
         this.router.navigate(['/home']);
       },
       error => {

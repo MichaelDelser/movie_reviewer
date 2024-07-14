@@ -58,7 +58,7 @@ export class AuthService {
     return this.currentUserValue?.token || null;
   }
 
-  private setToken(token: string, username: string, role: string): void {
+  setToken(token: string, username: string, role: string): void {
     const user = { token, username, role };
     localStorage.setItem('currentUser', JSON.stringify(user));
     this.currentUserSubject.next(user);
