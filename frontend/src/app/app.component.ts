@@ -29,11 +29,15 @@ export class AppComponent {
   }
 
   logout() {
-    this.authService.logout();
+    this.authService.logOut();
     this.router.navigate(['/home']);
   }
 
   toggleDropdown(visible: boolean) {
     this.dropdownVisible = visible;
+  }
+
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
   }
 }

@@ -11,6 +11,7 @@
       <span mat-button>{{ getUsername() }}</span>
       <div class="dropdown-content" [class.show]="dropdownVisible">
         <a mat-button routerLink="/protected">Protected Page</a>
+        <a mat-button *ngIf="isAdmin()" routerLink="/admin">Admin</a>
         <a mat-button (click)="logout()">Logout</a>
       </div>
     </div>
