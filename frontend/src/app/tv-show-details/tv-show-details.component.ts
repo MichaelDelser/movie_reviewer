@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '../movie.service';
 import {NgForOf, NgIf} from "@angular/common";
+import {ReviewComponent} from "../review/review.component";
 
 @Component({
   selector: 'app-tv-show-details',
@@ -9,7 +10,8 @@ import {NgForOf, NgIf} from "@angular/common";
   standalone: true,
   imports: [
     NgIf,
-    NgForOf
+    NgForOf,
+    ReviewComponent
   ],
   styleUrls: ['./tv-show-details.component.scss']
 })
@@ -19,9 +21,11 @@ export class TvShowDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private movieService: MovieService) {}
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.movieService.getTvShowDetails(id).subscribe(tvShow => {
-      this.tvShow = tvShow;
-    });
+    const id = +this.route.snapshot.paramMap.get('id')!;
+    if (id) {
+      this.movieService.getTvShowDetails(id).subscribe(tvShow => {
+        this.tvShow = tvShow;
+      });
+    }
   }
 }

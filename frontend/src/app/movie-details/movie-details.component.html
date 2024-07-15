@@ -1,47 +1,5 @@
-<div class="movie-details">
+<div *ngIf="movie">
   <h1>{{ movie.title }}</h1>
   <p>{{ movie.overview }}</p>
-
-  <div class="reviews">
-    <div *ngFor="let review of reviews" class="review-container">
-      <h3>{{ review.title }}</h3>
-      <p>{{ review.content }}</p>
-      <p class="rating">Rating: {{ review.rating }}</p>
-      <p class="helpfulness">Helpfulness: {{ review.helpfulness }}</p>
-      <button (click)="upvoteReview(review._id)" class="upvote-button">Upvote</button>
-    </div>
-  </div>
-
-  <div class="new-review-form">
-    <h2>Submit a Review</h2>
-    <form (ngSubmit)="addReview()">
-      <div>
-        <label for="title">Title <span class="required">*</span></label>
-        <input type="text" id="title" [(ngModel)]="newReview.title" name="title" required>
-        <div *ngIf="errorMessages.title" class="error-message">{{ errorMessages.title }}</div>
-      </div>
-
-      <div>
-        <label>Content</label>
-        <textarea [(ngModel)]="newReview.content" name="content" rows="4"></textarea>
-        <div *ngIf="errorMessages.content" class="error-message">{{ errorMessages.content }}</div>
-      </div>
-
-      <div>
-        <label>Rating</label>
-        <div class="star-rating">
-          <span *ngFor="let star of stars; let i = index"
-                [class.filled]="i < hoverIndex || (hoverIndex === -1 && i < newReview.rating)"
-                (mouseover)="highlightStars(i)"
-                (mouseleave)="resetStars()"
-                (click)="rateMovie(i + 1)">
-            &#9733;
-          </span>
-        </div>
-        <div *ngIf="errorMessages.rating" class="error-message-rating">{{ errorMessages.rating }}</div>
-      </div>
-
-      <button type="submit" class="submit-button">Submit</button>
-    </form>
-  </div>
+  <app-review [contentType]="'Movie'" [contentId]="movie.id"></app-review>
 </div>
