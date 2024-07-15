@@ -1,0 +1,6 @@
+<div *ngFor="let review of reviews">
+  <h3>{{ review.title }}</h3>
+  <p>Rating: {{ review.rating }}/10</p>
+  <p>{{ review.content }}</p>
+  <button (click)="upvoteReview(review._id)">Helpful ({{ review.helpfulness }})</button>
+</div>

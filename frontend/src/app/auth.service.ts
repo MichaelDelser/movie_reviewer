@@ -24,7 +24,7 @@ export class AuthService {
   logIn(username: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/auth/login`, { username, password })
       .pipe(map(user => {
-        this.setToken(user.token, user.username, user.role);
+        this.setToken(user.token, user.username, user.id, user.role);
         return user;
       }));
   }
@@ -32,7 +32,7 @@ export class AuthService {
   signUp(username: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/auth/signup`, { username, password })
       .pipe(map(user => {
-        this.setToken(user.token, user.username, user.role);
+        this.setToken(user.token, user.username, user.id, user.role);
         return user;
       }));
   }
@@ -58,8 +58,8 @@ export class AuthService {
     return this.currentUserValue?.token || null;
   }
 
-  private setToken(token: string, username: string, role: string): void {
-    const user = { token, username, role };
+  private setToken(token: string, username: string, id: string, role: string): void {
+    const user = { token, username, id, role };
     localStorage.setItem('currentUser', JSON.stringify(user));
     this.currentUserSubject.next(user);
   }

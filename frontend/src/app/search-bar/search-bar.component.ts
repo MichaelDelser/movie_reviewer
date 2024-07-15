@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
-import { TmdbService } from '../tmdb.service';
+import { MovieService } from '../movie.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -15,7 +15,7 @@ export class SearchBarComponent {
   query: string = '';
   movies: any[] = [];
 
-  constructor(private tmdbService: TmdbService, private router: Router) {}
+  constructor(private tmdbService: MovieService, private router: Router) {}
 
   onSearch(): void {
     if (this.query.trim() !== '') {

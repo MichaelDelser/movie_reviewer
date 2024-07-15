@@ -1,15 +1,132 @@
-h2 {
-  font-size: 2em;
-  margin-bottom: 20px;
-}
-
-p {
-  font-size: 1.2em;
-  margin-bottom: 10px;
-}
-
-img {
-  max-width: 100%;
-  border-radius: 8px;
+.review-container {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 15px 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  p {
+    font-size: 1em;
+    margin: 5px 0;
+    color: #666;
+  }
+
+  .rating, .helpfulness {
+    font-weight: bold;
+    color: #444;
+  }
+
+  .upvote-button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}
+
+.new-review-form {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #444;
+  }
+
+  .required {
+    color: red;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #333;
+
+    &:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+  }
+
+  .star-rating {
+    font-size: 2em;
+    color: #ddd;
+    cursor: pointer;
+
+    span {
+      display: inline-block;
+      transition: color 0.2s;
+
+      &.filled {
+        color: #ffd700;
+      }
+    }
+  }
+
+  .submit-button {
+    background-color: #28a745;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #218838;
+    }
+  }
+
+  .error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
+
+  .error-message-rating {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 10px;  /* Adding margin to push the error message down */
+  }
 }

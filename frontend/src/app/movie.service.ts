@@ -6,7 +6,7 @@ import { environment } from '../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class TmdbService {
+export class MovieService {
   private apiKey = environment.tmdbApiKey;
   private apiUrl = 'https://api.themoviedb.org/3';
 
