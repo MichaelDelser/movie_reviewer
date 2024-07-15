@@ -1,0 +1,9 @@
+<div *ngIf="tvShow">
+  <h1>{{ tvShow.name }}</h1>
+  <p>{{ tvShow.overview }}</p>
+  <ul>
+    <li *ngFor="let season of tvShow.seasons">
+      Season {{ season.season_number }}: {{ season.episode_count }} episodes
+    </li>
+  </ul>
+</div>

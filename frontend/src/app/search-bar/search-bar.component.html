@@ -2,17 +2,17 @@
   <input
     type="text"
     [(ngModel)]="query"
-    placeholder="Search for a movie..."
+    placeholder="Search for a movie or TV show..."
     (keyup.enter)="onSearch()"
   />
   <button (click)="onSearch()">Search</button>
 </div>
 <div class="movie-results">
-  <div *ngFor="let movie of movies" class="movie-card">
-    <a (click)="navigateToDetails(movie.id)">
-      <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
-      <h3>{{ movie.title }}</h3>
-      <p>{{ movie.release_date | date }}</p>
+  <div *ngFor="let item of results" class="movie-card">
+    <a (click)="viewDetails(item)">
+      <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" alt="{{ item.title || item.name }}">
+      <h3>{{ item.title || item.name }}</h3>
+      <p>{{ item.release_date || item.first_air_date | date }}</p>
     </a>
   </div>
 </div>

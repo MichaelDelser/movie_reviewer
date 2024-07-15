@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 
@@ -12,18 +12,15 @@ export class MovieService {
 
   constructor(private http: HttpClient) {}
 
-  searchMovies(query: string): Observable<any> {
-    const params = new HttpParams().set('api_key', this.apiKey).set('query', query);
-    return this.http.get(`${this.apiUrl}/search/movie`, { params });
+  searchMoviesAndShows(query: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/search/multi?api_key=${this.apiKey}&query=${query}`);
   }
 
   getMovieDetails(id: number): Observable<any> {
-    const params = new HttpParams().set('api_key', this.apiKey);
-    return this.http.get(`${this.apiUrl}/movie/${id}`, { params });
+    return this.http.get(`${this.apiUrl}/movie/${id}?api_key=${this.apiKey}`);
   }
 
-  getTvDetails(id: number): Observable<any> {
-    const params = new HttpParams().set('api_key', this.apiKey);
-    return this.http.get(`${this.apiUrl}/tv/${id}`, { params });
+  getTvShowDetails(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/tv/${id}?api_key=${this.apiKey}`);
   }
 }

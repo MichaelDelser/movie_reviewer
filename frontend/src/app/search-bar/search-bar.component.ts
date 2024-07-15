@@ -13,19 +13,23 @@ import { MovieService } from '../movie.service';
 })
 export class SearchBarComponent {
   query: string = '';
-  movies: any[] = [];
+  results: any[] = [];
 
-  constructor(private tmdbService: MovieService, private router: Router) {}
+  constructor(private movieService: MovieService, private router: Router) {}
 
   onSearch(): void {
-    if (this.query.trim() !== '') {
-      this.tmdbService.searchMovies(this.query).subscribe((response: any) => {
-        this.movies = response.results;
+    if (this.query) {
+      this.movieService.searchMoviesAndShows(this.query).subscribe((response: any) => {
+        this.results = response.results;
       });
     }
   }
 
-  navigateToDetails(movieId: number): void {
-    this.router.navigate(['/movie', movieId]);
+  viewDetails(item: any): void {
+    if (item.media_type === 'movie') {
+      this.router.navigate(['/movie-details', item.id]);
+    } else if (item.media_type === 'tv') {
+      this.router.navigate(['/tv-show-details', item.id]);
+    }
   }
 }
