@@ -5,6 +5,11 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const router = express.Router();
 
+const generateAuthToken = (user) => {
+  const payload = { user: { id: user.id, role: user.role } };
+  return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 360000 });
+};
+
 // Sign Up
 router.post('/signup', [
   check('username', 'Please include a valid username').not().isEmpty(),
@@ -15,7 +20,7 @@ router.post('/signup', [
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { username, password, role = 'user' } = req.body; // Include role with default 'user'
+  const { username, password, role = 'user' } = req.body;
 
   try {
     let user = await User.findOne({ username });
@@ -30,12 +35,8 @@ router.post('/signup', [
 
     await user.save();
 
-    const payload = { user: { id: user.id, role: user.role } };
-
-    jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 360000 }, (err, token) => {
-      if (err) throw err;
-      res.json({ token, username: user.username, role: user.role });
-    });
+    const token = generateAuthToken(user);
+    res.json({ token, username: user.username, id: user.id, role: user.role });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
@@ -65,12 +66,8 @@ router.post('/login', [
       return res.status(400).json({ msg: 'Invalid Credentials' });
     }
 
-    const payload = { user: { id: user.id, role: user.role } };
-
-    jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 360000 }, (err, token) => {
-      if (err) throw err;
-      res.json({ token, username: user.username, role: user.role });
-    });
+    const token = generateAuthToken(user);
+    res.json({ token, username: user.username, id: user.id, role: user.role });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');

@@ -1,37 +1,40 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-const UserSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
+    unique: true,
     required: true,
-    unique: true
+    trim: true
   },
   password: {
     type: String,
-    required: true
+    required: true,
+    minlength: 7,
+    trim: true
   },
   role: {
     type: String,
+    enum: ['user', 'admin'],
     default: 'user'
   }
 });
 
-// Static method to find user by credentials
-UserSchema.statics.findByCredentials = async (username, password) => {
+userSchema.statics.findByCredentials = async (username, password) => {
   const user = await User.findOne({ username });
   if (!user) {
-    throw new Error('Invalid login credentials');
+    throw new Error('Invalid credentials');
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    throw new Error('Invalid login credentials');
+    throw new Error('Invalid credentials');
   }
 
   return user;
 };
 
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;

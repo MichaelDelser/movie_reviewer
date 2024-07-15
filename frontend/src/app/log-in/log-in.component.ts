@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-log-in',
@@ -30,13 +31,17 @@ export class LogInComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   logIn(): void {
-    this.authService.logIn(this.username, this.password).subscribe({
-      next: (response) => {
-        this.router.navigate(['/home']);  // Navigate to the home screen
+    this.authService.logIn(this.username, this.password).subscribe(
+      () => {
+        this.router.navigate(['/home']);
       },
-      error: (error) => {
-        this.errorMessage = error;
+      (error: HttpErrorResponse) => {
+        if (error.error.errors) {
+          this.errorMessage = error.error.errors.map((err: any) => err.msg).join(' ');
+        } else {
+          this.errorMessage = error.error.msg;
+        }
       }
-    });
+    );
   }
 }
