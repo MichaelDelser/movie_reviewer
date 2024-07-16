@@ -1,24 +1,45 @@
-/* src/app/app.component.scss */
-.spacer {
-  flex: 1 1 auto;
-}
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
 
-mat-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  li {
+    float: left;
 
-  a[mat-button], span[mat-button] {
-    color: black;
-    text-transform: uppercase;
-    margin: 0 8px;
-    font-size: 1.2em; /* Increase font size */
+    a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+
+      &:hover {
+        background-color: #111;
+      }
+    }
   }
 }
 
 .dropdown {
-  position: relative;
-  display: inline-block;
+  float: left;
+  overflow: hidden;
+
+  .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+
+    &:hover {
+      background-color: #111;
+    }
+  }
 
   .dropdown-content {
     display: none;
@@ -27,27 +48,22 @@ mat-toolbar {
     min-width: 160px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
-    right: 0;
-    flex-direction: column; /* Ensure items are positioned vertically */
-    text-align: left; /* Align text to the left */
 
-    a[mat-button] {
+    a {
+      float: none;
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
       text-align: left;
-      width: 100%;
-      color: black; /* Ensure the text is visible */
-    }
 
-    a[mat-button]:hover {
-      background-color: #ddd;
+      &:hover {
+        background-color: #ddd;
+      }
     }
   }
 
-  .show {
-    display: flex; /* Use flex to enable column layout */
-    flex-direction: column;
+  &:hover .dropdown-content {
+    display: block;
   }
-}
-
-.content {
-  padding: 20px;
 }

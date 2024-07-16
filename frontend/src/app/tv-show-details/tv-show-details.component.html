@@ -1,10 +1,11 @@
 <div *ngIf="tvShow">
   <h1>{{ tvShow.name }}</h1>
   <p>{{ tvShow.overview }}</p>
-  <ul>
-    <li *ngFor="let season of tvShow.seasons">
-      Season {{ season.season_number }}: {{ season.episode_count }} episodes
-    </li>
-  </ul>
+  <button [disabled]="isInWatchlist" (click)="addToWatchlist()">
+    {{ isInWatchlist ? 'Added to Watchlist' : 'Add to Watchlist' }}
+  </button>
+  <button [disabled]="isInFavourites" (click)="addToFavourites()">
+    {{ isInFavourites ? 'Added to Favourites' : 'Add to Favourites' }}
+  </button>
   <app-review [contentType]="'TVShow'" [contentId]="tvShow.id"></app-review>
 </div>

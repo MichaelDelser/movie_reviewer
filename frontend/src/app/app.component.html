@@ -12,6 +12,9 @@
       <div class="dropdown-content" [class.show]="dropdownVisible">
         <a mat-button routerLink="/protected">Protected Page</a>
         <a mat-button *ngIf="isAdmin()" routerLink="/admin">Admin</a>
+        <a [routerLink]="['/', authService.currentUserValue.username]">Profile</a>
+        <a [routerLink]="['/', authService.currentUserValue.username, 'favourites']">Favourites</a>
+        <a [routerLink]="['/', authService.currentUserValue.username, 'watchlist']">Watchlist</a>
         <a mat-button (click)="logout()">Logout</a>
       </div>
     </div>
