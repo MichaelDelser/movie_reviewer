@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
-import { WatchlistService } from '../watchlist.service';
-import { AuthService } from '../auth.service';
-import {NgForOf} from "@angular/common";
+import { WatchlistService } from '../services/watchlist.service'; // Adjust the path as needed
+import { AuthService } from '../services/auth.service';
+import {NgForOf} from "@angular/common"; // Adjust the path as needed
 
 @Component({
   selector: 'app-watchlist',
@@ -16,7 +16,7 @@ import {NgForOf} from "@angular/common";
 })
 export class WatchlistComponent implements OnInit {
   watchlist: any[] = [];
-  username!: string;
+  username: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -25,17 +25,21 @@ export class WatchlistComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.username = this.route.snapshot.paramMap.get('username')!;
-    const userId = this.authService.currentUserValue.id;
-    this.watchlistService.getWatchlist(userId).subscribe(watchlist => {
-      this.watchlist = watchlist;
-    });
+    const user = this.authService.currentUserValue?.user;
+    if (user) {
+      this.username = user.username;
+      this.watchlistService.getWatchlist(user.id).subscribe((data) => {
+        this.watchlist = data;
+      });
+    }
   }
 
   removeFromWatchlist(itemId: string): void {
-    const userId = this.authService.currentUserValue.id;
-    this.watchlistService.removeFromWatchlist(userId, itemId).subscribe(() => {
-      this.watchlist = this.watchlist.filter(item => item.id !== itemId);
-    });
+    const user = this.authService.currentUserValue?.user;
+    if (user) {
+      this.watchlistService.removeFromWatchlist(user.id, itemId).subscribe(() => {
+        this.watchlist = this.watchlist.filter(item => item.itemId !== itemId);
+      });
+    }
   }
 }

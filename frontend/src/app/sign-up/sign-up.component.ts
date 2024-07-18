@@ -1,25 +1,24 @@
-// src/app/sign-up/sign-up.component.ts
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import {Router, RouterLink} from '@angular/router';
-import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import {FormsModule} from "@angular/forms";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
+import {MatButton} from "@angular/material/button";
+import {NgIf} from "@angular/common"; // Adjust the path as needed
 
 @Component({
   selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    RouterLink
+    MatFormField,
+    MatInput,
+    MatButton,
+    MatLabel,
+    NgIf
   ],
-  templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
@@ -27,25 +26,23 @@ export class SignUpComponent {
   password: string = '';
   passwordConfirm: string = '';
   passwordMismatch: boolean = false;
-  errorMessage: string | null = null;
+  errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  signUp() {
-    this.passwordMismatch = this.password !== this.passwordConfirm;
-
-    if (this.passwordMismatch) {
-      this.errorMessage = null;
+  onSignUp(): void {
+    if (this.password !== this.passwordConfirm) {
+      this.passwordMismatch = true;
       return;
     }
 
-    this.authService.signUp(this.username, this.password).subscribe(
-      response => {
+    this.authService.signup(this.username, this.password).subscribe({
+      next: () => {
         this.router.navigate(['/home']);
       },
-      error => {
-        this.errorMessage = error; // Assuming error is a string message from the server
+      error: err => {
+        this.errorMessage = err.error.message || 'An error occurred';
       }
-    );
+    });
   }
 }

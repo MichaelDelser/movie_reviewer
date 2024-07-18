@@ -1,39 +1,12 @@
-<div class="reviews">
-  <div *ngFor="let review of reviews" class="review-container">
-    <h3>{{ review.title }}</h3>
-    <p>{{ review.content }}</p>
-    <p class="rating">Rating: {{ review.rating }}</p>
-    <button class="upvote-button" (click)="upvoteReview(review._id)">Helpful</button>
-    <p class="helpfulness">{{ review.helpfulness }} other people found this helpful</p>
+<div class="add-review">
+  <h3>Add a Review</h3>
+  <input type="text" [(ngModel)]="newReviewTitle" placeholder="Review Title">
+  <div class="stars">
+    <ng-container *ngFor="let star of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
+      <input type="radio" [id]="'star' + star" name="rating" [(ngModel)]="newReviewRating" [value]="star">
+      <label [for]="'star' + star" (click)="setRating(star)">★</label>
+    </ng-container>
   </div>
-</div>
-
-<div class="new-review-form" *ngIf="authService.currentUserValue">
-  <h2>Submit a Review</h2>
-  <form (ngSubmit)="addReview()">
-    <div>
-      <label for="title">Title <span class="required">*</span></label>
-      <input type="text" id="title" [(ngModel)]="newReview.title" name="title" required>
-      <div *ngIf="errorMessages.title" class="error-message">{{ errorMessages.title }}</div>
-    </div>
-    <div>
-      <label>Content</label>
-      <textarea [(ngModel)]="newReview.content" name="content" rows="4"></textarea>
-      <div *ngIf="errorMessages.content" class="error-message">{{ errorMessages.content }}</div>
-    </div>
-    <div>
-      <label>Rating</label>
-      <div class="star-rating">
-        <span *ngFor="let star of stars; let i = index"
-              [class.filled]="i < hoverIndex || (hoverIndex === -1 && i < newReview.rating)"
-              (mouseover)="highlightStars(i)"
-              (mouseleave)="resetStars()"
-              (click)="rateMovie(i + 1)">
-          &#9733;
-        </span>
-      </div>
-      <div *ngIf="errorMessages.rating" class="error-message-rating">{{ errorMessages.rating }}</div>
-    </div>
-    <button type="submit" class="submit-button">Submit</button>
-  </form>
+  <textarea [(ngModel)]="newReview" placeholder="Add a review..."></textarea>
+  <button (click)="addReview()">Submit</button>
 </div>

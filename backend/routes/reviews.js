@@ -15,40 +15,36 @@ router.post('/add', [
     }
     return true;
   }),
-], async (req, res) => {
+], async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.error('Validation errors:', errors.array());
     return res.status(400).json({ errors: errors.array() });
   }
 
   const { user_id, content_id, content_type, title, content, rating } = req.body;
-
-  console.log('Received review data:', req.body);
 
   try {
     const review = new Review({ user_id, content_id, content_type, title, content, rating });
     await review.save();
     res.status(201).json(review);
   } catch (err) {
-    console.error('Error saving review:', err.message);
-    res.status(500).json({ error: err.message });
+    next(err);
   }
 });
 
 // Fetch reviews for a specific content
-router.get('/:content_type/:content_id', async (req, res) => {
+router.get('/:content_type/:content_id', async (req, res, next) => {
   const { content_type, content_id } = req.params;
   try {
     const reviews = await Review.find({ content_type, content_id });
     res.json(reviews);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    next(err);
   }
 });
 
 // Upvote a review
-router.patch('/upvote/:review_id', async (req, res) => {
+router.patch('/upvote/:review_id', async (req, res, next) => {
   const { review_id } = req.params;
   try {
     const review = await Review.findByIdAndUpdate(
@@ -61,7 +57,7 @@ router.patch('/upvote/:review_id', async (req, res) => {
     }
     res.json(review);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    next(err);
   }
 });
 

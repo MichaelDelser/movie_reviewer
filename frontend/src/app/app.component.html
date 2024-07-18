@@ -1,4 +1,3 @@
-<!-- src/app/app.component.html -->
 <mat-toolbar color="primary">
   <a mat-button routerLink="/home">Home</a>
   <span class="spacer"></span>
@@ -7,17 +6,10 @@
     <a mat-button routerLink="/signup">Sign Up</a>
   </ng-container>
   <ng-template #loggedIn>
-    <div class="dropdown" (mouseover)="toggleDropdown(true)" (mouseout)="toggleDropdown(false)">
-      <span mat-button>{{ getUsername() }}</span>
-      <div class="dropdown-content" [class.show]="dropdownVisible">
-        <a mat-button routerLink="/protected">Protected Page</a>
-        <a mat-button *ngIf="isAdmin()" routerLink="/admin">Admin</a>
-        <a [routerLink]="['/', authService.currentUserValue.username]">Profile</a>
-        <a [routerLink]="['/', authService.currentUserValue.username, 'favourites']">Favourites</a>
-        <a [routerLink]="['/', authService.currentUserValue.username, 'watchlist']">Watchlist</a>
-        <a mat-button (click)="logout()">Logout</a>
-      </div>
-    </div>
+    <a mat-button [routerLink]="['/', getUsername(), 'favourites']">Favourites</a>
+    <a mat-button [routerLink]="['/', getUsername(), 'watchlist']">Watchlist</a>
+    <a mat-button [routerLink]="['/', getUsername()]">{{ getUsername() }}'s Profile</a>
+    <a mat-button (click)="logout()">Logout</a>
   </ng-template>
 </mat-toolbar>
 <div class="app-container">

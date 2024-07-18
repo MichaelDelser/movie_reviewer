@@ -1,43 +1,40 @@
-// src/app/app.component.ts
 import { Component } from '@angular/core';
-import {Router, RouterLink, RouterOutlet} from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
+import {MatToolbar} from "@angular/material/toolbar";
+import {MatAnchor} from "@angular/material/button";
 import {NgIf} from "@angular/common";
+import {RouterLink, RouterOutlet} from "@angular/router";
+import {MatLabel} from "@angular/material/form-field"; // Adjust the path as needed
 
 @Component({
   selector: 'app-root',
+  templateUrl: './app.component.html',
   standalone: true,
   imports: [
-    RouterLink,
-    MatToolbarModule,
-    MatButtonModule,
+    MatToolbar,
+    MatAnchor,
+    MatLabel,
     NgIf,
+    RouterLink,
     RouterOutlet
   ],
-  templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  dropdownVisible = false;
+  constructor(public authService: AuthService) {}
 
-  constructor(public authService: AuthService, private router : Router) {}
+  getUsername(): string {
+    return this.authService.currentUserValue?.user?.username || '';
+  }
 
-  getUsername(): string | null {
-    return this.authService.getUsername();
+  getToken(): boolean {
+    return this.authService.currentUserValue?.token;
+  }
+  isAdmin(): boolean {
+    return this.authService.currentUserValue?.role === 'admin';
   }
 
   logout() {
-    this.authService.logOut();
-    this.router.navigate(['/home']);
-  }
-
-  toggleDropdown(visible: boolean) {
-    this.dropdownVisible = visible;
-  }
-
-  isAdmin(): boolean {
-    return this.authService.isAdmin();
+    this.authService.logout();
   }
 }

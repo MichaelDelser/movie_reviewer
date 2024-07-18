@@ -10,6 +10,12 @@ import { provideRouter } from '@angular/router';
 import { AuthInterceptor } from './app/auth.interceptor';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {environment} from "./environments/environment";
+import {enableProdMode} from "@angular/core";
+
+if (environment.production) {
+  enableProdMode();
+}
 
 bootstrapApplication(AppComponent, {
   providers: [

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
-import { FavouriteService } from '../favourite.service';
-import { AuthService } from '../auth.service';
-import {NgForOf} from "@angular/common";
+import { FavouriteService } from '../services/favourite.service'; // Adjust the path as needed
+import { AuthService } from '../services/auth.service';
+import {NgForOf} from "@angular/common"; // Adjust the path as needed
 
 @Component({
   selector: 'app-favourites',
@@ -16,7 +16,7 @@ import {NgForOf} from "@angular/common";
 })
 export class FavouritesComponent implements OnInit {
   favourites: any[] = [];
-  username!: string;
+  username: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -25,17 +25,21 @@ export class FavouritesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.username = this.route.snapshot.paramMap.get('username')!;
-    const userId = this.authService.currentUserValue.id;
-    this.favouriteService.getFavourites(userId).subscribe(favourites => {
-      this.favourites = favourites;
-    });
+    const user = this.authService.currentUserValue?.user;
+    if (user) {
+      this.username = user.username;
+      this.favouriteService.getFavourites(user.id).subscribe((data) => {
+        this.favourites = data;
+      });
+    }
   }
 
   removeFromFavourites(itemId: string): void {
-    const userId = this.authService.currentUserValue.id;
-    this.favouriteService.removeFromFavourites(userId, itemId).subscribe(() => {
-      this.favourites = this.favourites.filter(item => item.id !== itemId);
-    });
+    const user = this.authService.currentUserValue?.user;
+    if (user) {
+      this.favouriteService.removeFromFavourites(user.id, itemId).subscribe(() => {
+        this.favourites = this.favourites.filter(item => item.itemId !== itemId);
+      });
+    }
   }
 }

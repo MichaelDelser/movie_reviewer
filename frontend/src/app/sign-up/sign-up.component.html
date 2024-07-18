@@ -1,45 +1,17 @@
-<!-- src/app/sign-up/sign-up.component.html -->
-<div class="signup-container">
-  <div class="benefits">
-    <h2>Benefits of being a member</h2>
-    <ul>
-      <li>✔ Find something to watch on your subscribed streaming services</li>
-      <li>✔ Log the movies and TV shows you have watched</li>
-      <li>✔ Keep track of your favourite movies and TV shows and get recommendations from them</li>
-      <li>✔ Build and maintain a personal watchlist</li>
-      <li>✔ Build custom mixed lists (movies and TV)</li>
-      <li>✔ Take part in movie and TV discussions</li>
-      <li>✔ Contribute to, and improve the information in our database</li>
-    </ul>
-  </div>
-  <div class="signup-form">
-    <h1>Sign up for an account</h1>
-    <p>
-      Signing up for an account is free and easy. Fill out the form below to get started. JavaScript is required to continue.
-    </p>
-    <form (ngSubmit)="signUp()">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Username</mat-label>
-        <input matInput type="text" [(ngModel)]="username" name="username" required>
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Password (6 characters minimum)</mat-label>
-        <input matInput type="password" [(ngModel)]="password" name="password" required>
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Password Confirm</mat-label>
-        <input matInput type="password" [(ngModel)]="passwordConfirm" name="passwordConfirm" required>
-      </mat-form-field>
-      <div *ngIf="passwordMismatch" class="error-message">
-        Passwords do not match!
-      </div>
-      <div *ngIf="errorMessage" class="error-message">
-        {{ errorMessage }}
-      </div>
-      <div class="actions">
-        <button mat-raised-button color="primary" type="submit">Sign Up</button>
-        <a mat-button routerLink="/login">Cancel</a>
-      </div>
-    </form>
-  </div>
-</div>
+<form (ngSubmit)="onSignUp()">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Username</mat-label>
+    <input matInput type="text" [(ngModel)]="username" name="username" required>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Password (6 characters minimum)</mat-label>
+    <input matInput type="password" [(ngModel)]="password" name="password" required minlength="6">
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Password Confirm</mat-label>
+    <input matInput type="password" [(ngModel)]="passwordConfirm" name="passwordConfirm" required>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">Sign Up</button>
+  <div *ngIf="passwordMismatch" class="error-message">Passwords do not match</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</form>

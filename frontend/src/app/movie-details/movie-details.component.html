@@ -1,11 +1,28 @@
 <div *ngIf="movie">
   <h1>{{ movie.title }}</h1>
+  <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
   <p>{{ movie.overview }}</p>
-  <button [disabled]="isInWatchlist" (click)="addToWatchlist()">
-    {{ isInWatchlist ? 'Added to Watchlist' : 'Add to Watchlist' }}
-  </button>
-  <button [disabled]="isInFavourites" (click)="addToFavourites()">
-    {{ isInFavourites ? 'Added to Favourites' : 'Add to Favourites' }}
-  </button>
-  <app-review [contentType]="'Movie'" [contentId]="movie.id"></app-review>
+  <p>Release Date: {{ movie.release_date | date }}</p>
+  <p>Rating: {{ movie.vote_average }}</p>
+  <button *ngIf="!isInWatchlist" (click)="addToWatchlist()">Add to Watchlist</button>
+  <button *ngIf="isInWatchlist" disabled>Added to Watchlist</button>
+  <button *ngIf="!isInFavourites" (click)="addToFavourites()">Add to Favourites</button>
+  <button *ngIf="isInFavourites" disabled>Added to Favourites</button>
+
+  <div class="reviews">
+    <h2>Reviews</h2>
+    <div *ngFor="let review of reviews" class="review">
+      <h3>{{ review.title }}</h3>
+      <p>Rating: {{ review.rating }}</p>
+      <p>{{ review.content }}</p>
+      <button (click)="removeReview(review.id)">Remove</button>
+    </div>
+    <div class="add-review">
+      <h3>Add a Review</h3>
+      <input type="text" [(ngModel)]="newReviewTitle" placeholder="Review Title">
+      <input type="number" [(ngModel)]="newReviewRating" min="1" max="10" placeholder="Rating">
+      <textarea [(ngModel)]="newReview" placeholder="Add a review..."></textarea>
+      <button (click)="addReview()">Submit</button>
+    </div>
+  </div>
 </div>

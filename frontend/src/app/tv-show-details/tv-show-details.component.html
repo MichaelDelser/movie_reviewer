@@ -1,11 +1,26 @@
 <div *ngIf="tvShow">
   <h1>{{ tvShow.name }}</h1>
+  <img [src]="'https://image.tmdb.org/t/p/w500' + tvShow.poster_path" alt="{{ tvShow.name }}">
   <p>{{ tvShow.overview }}</p>
-  <button [disabled]="isInWatchlist" (click)="addToWatchlist()">
-    {{ isInWatchlist ? 'Added to Watchlist' : 'Add to Watchlist' }}
-  </button>
-  <button [disabled]="isInFavourites" (click)="addToFavourites()">
-    {{ isInFavourites ? 'Added to Favourites' : 'Add to Favourites' }}
-  </button>
-  <app-review [contentType]="'TVShow'" [contentId]="tvShow.id"></app-review>
+  <p>First Air Date: {{ tvShow.first_air_date | date }}</p>
+  <p>Rating: {{ tvShow.vote_average }}</p>
+  <button *ngIf="!isInWatchlist" (click)="addToWatchlist()">Add to Watchlist</button>
+  <button *ngIf="isInWatchlist" disabled>Added to Watchlist</button>
+  <button *ngIf="!isInFavourites" (click)="addToFavourites()">Add to Favourites</button>
+  <button *ngIf="isInFavourites" disabled>Added to Favourites</button>
+
+  <div class="reviews">
+    <h2>Reviews</h2>
+    <div *ngFor="let review of reviews" class="review">
+      <h3>{{ review.title }}</h3>
+      <p>
+        <span *ngFor="let star of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; let i = index" [ngClass]="{'filled': i < review.rating}">
+          ★
+        </span>
+      </p>
+      <p>{{ review.content }}</p>
+      <button (click)="removeReview(review.id)">Remove</button>
+    </div>
+    <app-review [contentId]="tvShow.id" [contentType]="'TVShow'" (reviewAdded)="onReviewAdded($event)"></app-review>
+  </div>
 </div>

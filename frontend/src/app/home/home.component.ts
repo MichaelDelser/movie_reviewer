@@ -1,12 +1,22 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {MatCard} from "@angular/material/card";
+import { Component, OnInit } from '@angular/core';
 import {SearchBarComponent} from "../search-bar/search-bar.component";
+import {MatCard} from "@angular/material/card"; // Adjust the path as needed
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   standalone: true,
-  imports: [CommonModule, MatCard, SearchBarComponent],
+  imports: [
+    SearchBarComponent,
+    MatCard
+  ],
+  styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {}
+export class HomeComponent implements OnInit {
+
+  constructor() {}
+
+  ngOnInit(): void {
+    // Add any necessary initialization code here
+  }
+}
