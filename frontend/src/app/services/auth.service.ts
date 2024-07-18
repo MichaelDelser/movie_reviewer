@@ -54,4 +54,8 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!this.currentUserValue;
   }
+
+  isAdmin(): boolean {
+    return this.currentUserValue?.role === 'admin';
+  }
 }

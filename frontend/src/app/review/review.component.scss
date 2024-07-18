@@ -1,6 +1,5 @@
 .stars {
   display: flex;
-  flex-direction: row-reverse;
   justify-content: flex-end;
 
   input[type="radio"] {
@@ -8,38 +7,14 @@
   }
 
   label {
-    position: relative;
-    width: 1em;
-    font-size: 2rem;
-    color: #ccc;
+    font-size: 1.5em;
+    color: lightgray;
     cursor: pointer;
-
-    &:before {
-      content: "\2605";
-      position: absolute;
-      display: block;
-      top: 0;
-      left: 0;
-    }
-
-    &:hover,
-    &:hover ~ label,
-    input[type="radio"]:checked ~ label {
-      color: #ffdd00;
-    }
   }
-}
 
-.add-review {
-  margin-top: 20px;
-}
-
-textarea {
-  width: 100%;
-  height: 100px;
-  margin-top: 10px;
-}
-
-button {
-  margin-top: 10px;
+  label:hover,
+  label:hover ~ label,
+  input[type="radio"]:checked ~ label {
+    color: gold;
+  }
 }

@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MovieService } from '../services/movie.service'; // Adjust the path as needed
-import { WatchlistService } from '../services/watchlist.service'; // Adjust the path as needed
-import { FavouriteService } from '../services/favourite.service'; // Adjust the path as needed
-import { ReviewService } from '../services/review.service'; // Adjust the path as needed
+import { MovieService } from '../services/movie.service';
 import { AuthService } from '../services/auth.service';
-import {DatePipe, NgForOf, NgIf} from "@angular/common";
-import {FormsModule} from "@angular/forms"; // Adjust the path as needed
+import { WatchlistService } from '../services/watchlist.service';
+import { FavouriteService } from '../services/favourite.service';
+import {DatePipe, NgIf} from "@angular/common";
+import {ReviewComponent} from "../review/review.component";
 
 @Component({
   selector: 'app-movie-details',
@@ -14,84 +13,73 @@ import {FormsModule} from "@angular/forms"; // Adjust the path as needed
   standalone: true,
   imports: [
     NgIf,
-    DatePipe,
-    NgForOf,
-    FormsModule
+    ReviewComponent,
+    DatePipe
   ],
   styleUrls: ['./movie-details.component.scss']
 })
 export class MovieDetailsComponent implements OnInit {
   movie: any;
-  isInWatchlist: boolean = false;
-  isInFavourites: boolean = false;
-  reviews: any[] = [];
-  newReview: string = '';
-  newReviewTitle: string = '';
-  newReviewRating: number = 1;
+  user: any;
+  isInWatchlist = false;
+  isInFavourites = false;
 
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
+    private authService: AuthService,
     private watchlistService: WatchlistService,
-    private favouriteService: FavouriteService,
-    private reviewService: ReviewService,
-    private authService: AuthService
-  ) {}
+    private favouriteService: FavouriteService
+  ) {
+    this.user = this.authService.currentUserValue?.user;
+  }
 
   ngOnInit(): void {
     const movieId = this.route.snapshot.paramMap.get('id');
     if (movieId) {
       this.movieService.getMovieDetails(+movieId).subscribe((data) => {
         this.movie = data;
-        const user = this.authService.currentUserValue?.user;
-        if (user) {
-          this.watchlistService.isInWatchlist(user.id, movieId).subscribe((status) => {
+        if (this.user) {
+          this.watchlistService.isInWatchlist(this.user.id, movieId).subscribe((status) => {
             this.isInWatchlist = status;
           });
-          this.favouriteService.isInFavourites(user.id, movieId).subscribe((status) => {
+          this.favouriteService.isInFavourites(this.user.id, movieId).subscribe((status) => {
             this.isInFavourites = status;
           });
         }
-      });
-      this.reviewService.getReviews('Movie', movieId).subscribe((data) => {
-        this.reviews = data;
       });
     }
   }
 
   addToWatchlist(): void {
-    const user = this.authService.currentUserValue?.user;
-    if (user && this.movie) {
-      this.watchlistService.addToWatchlist(user.id, this.movie.id, 'Movie').subscribe(() => {
+    if (this.user) {
+      this.watchlistService.addToWatchlist(this.user.id, this.movie.id, 'Movie').subscribe(() => {
         this.isInWatchlist = true;
       });
     }
   }
 
+  removeFromWatchlist(): void {
+    if (this.user) {
+      this.watchlistService.removeFromWatchlist(this.user.id, this.movie.id).subscribe(() => {
+        this.isInWatchlist = false;
+      });
+    }
+  }
+
   addToFavourites(): void {
-    const user = this.authService.currentUserValue?.user;
-    if (user && this.movie) {
-      this.favouriteService.addToFavourites(user.id, this.movie.id, 'Movie').subscribe(() => {
+    if (this.user) {
+      this.favouriteService.addToFavourites(this.user.id, this.movie.id, 'Movie').subscribe(() => {
         this.isInFavourites = true;
       });
     }
   }
 
-  addReview(): void {
-    const user = this.authService.currentUserValue?.user;
-    if (user && this.movie && this.newReview.trim() && this.newReviewTitle.trim() && this.newReviewRating) {
-      this.reviewService.addReview(user.id, this.movie.id, 'Movie', this.newReviewTitle, this.newReview, this.newReviewRating).subscribe((review) => {
-        this.reviews.push(review);
-        this.newReview = '';
-        this.newReviewTitle = '';
-        this.newReviewRating = 1;
+  removeFromFavourites(): void {
+    if (this.user) {
+      this.favouriteService.removeFromFavourites(this.user.id, this.movie.id).subscribe(() => {
+        this.isInFavourites = false;
       });
     }
-  }
-
-  removeReview(reviewId: string): void {
-    this.reviewService.removeReview(reviewId).subscribe(() => {
-      this.reviews = this.reviews.filter(review => review.id !== reviewId);
-    });
   }
 }

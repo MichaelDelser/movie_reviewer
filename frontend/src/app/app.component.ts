@@ -27,13 +27,6 @@ export class AppComponent {
     return this.authService.currentUserValue?.user?.username || '';
   }
 
-  getToken(): boolean {
-    return this.authService.currentUserValue?.token;
-  }
-  isAdmin(): boolean {
-    return this.authService.currentUserValue?.role === 'admin';
-  }
-
   logout() {
     this.authService.logout();
   }

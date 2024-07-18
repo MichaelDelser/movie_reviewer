@@ -1,8 +1,8 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { AuthService } from '../services/auth.service'; // Adjust the path as needed
+import { Component, OnInit, Input } from '@angular/core';
 import { ReviewService } from '../services/review.service';
+import { AuthService } from '../services/auth.service';
 import {FormsModule} from "@angular/forms";
-import {NgForOf} from "@angular/common"; // Adjust the path as needed
+import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-review',
@@ -10,37 +10,148 @@ import {NgForOf} from "@angular/common"; // Adjust the path as needed
   standalone: true,
   imports: [
     FormsModule,
+    NgIf,
     NgForOf
   ],
   styleUrls: ['./review.component.scss']
 })
-export class ReviewComponent {
+export class ReviewComponent implements OnInit {
   @Input() contentId!: string;
   @Input() contentType!: string;
-  @Output() reviewAdded = new EventEmitter<any>();
 
-  newReview: string = '';
-  newReviewTitle: string = '';
-  newReviewRating: number = 1;
+  reviews: any[] = [];
+  newReview = '';
+  newReviewTitle = '';
+  newReviewRating = 0;
+  editingReviewId: string | null = null;
+  editingReviewTitle = '';
+  editingReviewContent = '';
+  editingReviewRating = 0;
+  user: any;
+  errorMessages: string[] = [];
+  hasWrittenReview: boolean = false;
 
   constructor(
     private reviewService: ReviewService,
     private authService: AuthService
-  ) {}
+  ) {
+    this.user = this.authService.currentUserValue?.user;
+  }
+
+  ngOnInit(): void {
+    this.loadReviews();
+  }
+
+  loadReviews(): void {
+    this.reviewService.getReviews(this.contentType, this.contentId).subscribe((reviews) => {
+      this.reviews = reviews;
+      this.reviews.forEach((review) => {
+        review.upvotesCount = review.upvotesCount || 0; // Ensure upvotesCount is a number
+        this.reviewService.hasUpvoted(this.user.id, review._id).subscribe((hasUpvoted) => {
+          review.hasUpvoted = hasUpvoted;
+        });
+
+        if (review.user_id === this.user.id) {
+          this.hasWrittenReview = true;
+        }
+      });
+    });
+  }
 
   addReview(): void {
-    const user = this.authService.currentUserValue?.user;
-    if (user && this.newReview.trim() && this.newReviewTitle.trim() && this.newReviewRating) {
-      this.reviewService.addReview(user.id, this.contentId, this.contentType, this.newReviewTitle, this.newReview, this.newReviewRating).subscribe((review) => {
-        this.reviewAdded.emit(review);
+    this.errorMessages = [];  // Clear previous error messages
+
+    this.reviewService.addReview(this.user.id, this.contentId, this.contentType, this.newReviewTitle, this.newReview, this.newReviewRating).subscribe({
+      next: (review) => {
+        this.reviews.push(review);
         this.newReview = '';
         this.newReviewTitle = '';
-        this.newReviewRating = 1;
+        this.newReviewRating = 0;
+        this.errorMessages = [];
+        this.hasWrittenReview = true;
+      },
+      error: (error) => {
+        this.errorMessages = error.error.errors || [error.error];
+      }
+    });
+  }
+
+  editReview(review: any): void {
+    console.log('editReview: received review object:', review); // Debug log
+    this.editingReviewId = review._id; // Assuming MongoDB's default ID field is _id
+    this.editingReviewTitle = review.title;
+    this.editingReviewContent = review.content;
+    this.editingReviewRating = review.rating;
+    console.log('editReview:', this.editingReviewId, this.editingReviewTitle, this.editingReviewContent, this.editingReviewRating); // Debug log
+  }
+
+  updateReview(): void {
+    this.errorMessages = [];  // Clear previous error messages
+
+    if (this.editingReviewId) {
+      this.reviewService.updateReview(this.editingReviewId, this.user.id, this.editingReviewTitle, this.editingReviewContent, this.editingReviewRating).subscribe({
+        next: (updatedReview) => {
+          const index = this.reviews.findIndex((review) => review._id === this.editingReviewId);
+          if (index !== -1) {
+            this.reviews[index] = updatedReview;
+          }
+          this.cancelEditing();
+          this.errorMessages = [];
+        },
+        error: (error) => {
+          this.errorMessages = error.error.errors || [error.error];
+        }
       });
+    } else {
+      console.log('updateReview: editingReviewId is null');
     }
   }
 
-  setRating(rating: number): void {
-    this.newReviewRating = rating;
+  cancelEditing(): void {
+    this.editingReviewId = null;
+    this.editingReviewTitle = '';
+    this.editingReviewContent = '';
+    this.editingReviewRating = 0;
+  }
+
+  removeReview(reviewId: string): void {
+    this.errorMessages = [];  // Clear previous error messages
+
+    this.reviewService.removeReview(reviewId, this.user.id).subscribe({
+      next: () => {
+        this.reviews = this.reviews.filter((review) => review._id !== reviewId);
+        this.hasWrittenReview = false;
+      },
+      error: (error) => {
+        this.errorMessages = error.error.errors || [error.error];
+      }
+    });
+  }
+
+  upvoteReview(reviewId: string): void {
+    this.reviewService.upvoteReview(this.user.id, reviewId).subscribe({
+      next: (response) => {
+        const review = this.reviews.find((r) => r._id === reviewId);
+        if (review) {
+          review.hasUpvoted = true;
+          review.upvotesCount = response.upvotesCount; // Update with the correct count from the backend
+        }
+      },
+      error: (error) => {
+        this.errorMessages = error.error.errors || [error.error];
+      }
+    });
+  }
+
+  setRating(star: number): void {
+    this.newReviewRating = star;
+  }
+
+  isReviewAuthor(review: any): boolean {
+    return review.user_id === this.user.id;
+  }
+
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
   }
 }

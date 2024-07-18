@@ -1,7 +1,7 @@
 <div>
   <h1>{{ username }}'s Favourites</h1>
   <div *ngFor="let item of favourites" class="item-preview">
-    <a [routerLink]="[item.itemType === 'movie' ? '/movie-details' : '/tv-show-details', item.itemId]">
+    <a [routerLink]="[item.itemType === 'movie' ? '/movie-details' : '/tv-show-details', item.id]">
       <img [src]="'https://image.tmdb.org/t/p/w500' + item.backdrop_path" alt="{{ item.title || item.name }}">
       <h3>{{ item.title || item.name }}</h3>
       <p>{{ item.overview }}</p>
