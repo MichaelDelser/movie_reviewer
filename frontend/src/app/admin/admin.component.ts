@@ -1,12 +1,19 @@
+// admin.component.ts
 import { Component } from '@angular/core';
+import {MatTab, MatTabGroup} from "@angular/material/tabs";
+import {AdminUsersComponent} from "../admin-users/admin-users.component";
+import {AdminMoviesComponent} from "../admin-movies/admin-movies.component";
 
 @Component({
   selector: 'app-admin',
-  standalone: true,
-  imports: [],
   templateUrl: './admin.component.html',
-  styleUrl: './admin.component.scss'
+  standalone: true,
+  imports: [
+    MatTabGroup,
+    MatTab,
+    AdminUsersComponent,
+    AdminMoviesComponent
+  ],
+  styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent {
-
-}
+export class AdminComponent { }

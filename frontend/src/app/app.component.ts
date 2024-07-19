@@ -27,6 +27,10 @@ export class AppComponent {
     return this.authService.currentUserValue?.user?.username || '';
   }
 
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+
   logout() {
     this.authService.logout();
   }

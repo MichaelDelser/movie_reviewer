@@ -21,6 +21,10 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  getCurrentUser() {
+    return this.currentUserSubject.value;
+  }
+
   getToken(): string | null {
     return this.currentUserValue?.token || null;
   }
@@ -56,6 +60,6 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    return this.currentUserValue?.role === 'admin';
+    return this.currentUserValue?.user?.role === 'admin';
   }
 }

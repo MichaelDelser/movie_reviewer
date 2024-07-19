@@ -1,0 +1,40 @@
+/* admin-users.component.css */
+.users-container {
+  margin: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  cursor: pointer;
+  background-color: #f2f2f2;
+}
+
+th.sortable:hover {
+  background-color: #ddd;
+}
+
+th.sortable::after {
+  content: '\25b2'; /* Unicode character for up arrow */
+  margin-left: 5px;
+  display: inline-block;
+  visibility: hidden;
+}
+
+th.sortable.asc::after {
+  content: '\25b2'; /* Unicode character for up arrow */
+  visibility: visible;
+}
+
+th.sortable.desc::after {
+  content: '\25bc'; /* Unicode character for down arrow */
+  visibility: visible;
+}

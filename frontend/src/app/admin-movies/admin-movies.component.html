@@ -1,0 +1,23 @@
+<!-- admin-movies.component.html -->
+<div class="movies-container">
+  <h2>Manage Movies</h2>
+  <table>
+    <thead>
+    <tr>
+      <th (click)="sortMovies('title')" class="sortable">Title</th>
+      <th (click)="sortMovies('genre')" class="sortable">Genre</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let movie of movies">
+      <td>{{ movie.title }}</td>
+      <td>{{ movie.genre }}</td>
+      <td>
+        <button (click)="editMovie()">Edit</button>
+        <button (click)="deleteMovie(movie.id)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
