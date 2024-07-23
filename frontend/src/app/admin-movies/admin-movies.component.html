@@ -10,8 +10,8 @@
     </thead>
     <tbody>
     <tr *ngFor="let movie of movies">
-      <td>{{ movie.title }}</td>
-      <td>{{ movie.genre }}</td>
+      <td>{{ movie.title || movie.name }}</td>
+      <td>{{ movie.genres[0].name }}</td>
       <td>
         <button (click)="editMovie()">Edit</button>
         <button (click)="deleteMovie(movie.tmdb_id)">Delete</button>

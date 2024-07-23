@@ -22,8 +22,11 @@ export class SearchBarComponent {
   constructor(private movieService: MovieService, private router: Router) {}
 
   onSearch(): void {
-    this.movieService.search(this.query).subscribe((data: any) => {
-      this.results = data.results;
+    this.movieService.search(this.query).subscribe((results) => {
+      this.results = results.results;
+      this.movieService.filterBlacklistedItems(this.results).subscribe((filteredResults) => {
+        this.results = filteredResults;
+      });
     });
   }
 
