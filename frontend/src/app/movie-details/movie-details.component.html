@@ -4,6 +4,8 @@
   <p>{{ movie.overview }}</p>
   <p>Release Date: {{ movie.release_date | date }}</p>
   <p>Rating: {{ movie.vote_average }}</p>
+  <button *ngIf="isAdmin() && !isInDatabase" (click)="addMovieToDatabase()">Add to Database</button>
+  <button *ngIf="isAdmin() && isInDatabase" (click)="deleteMovieFromDatabase()">Delete from Database</button>
   <button *ngIf="!isInWatchlist" (click)="addToWatchlist()">Add to Watchlist</button>
   <button *ngIf="isInWatchlist" (click)="removeFromWatchlist()">Remove from Watchlist</button>
   <button *ngIf="!isInFavourites" (click)="addToFavourites()">Add to Favourites</button>

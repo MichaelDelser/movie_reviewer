@@ -6,6 +6,7 @@ import { WatchlistService } from '../services/watchlist.service';
 import { FavouriteService } from '../services/favourite.service';
 import {DatePipe, NgIf} from "@angular/common";
 import {ReviewComponent} from "../review/review.component";
+import {AdminMoviesService} from "../services/admin-movies.service";
 
 @Component({
   selector: 'app-movie-details',
@@ -23,13 +24,15 @@ export class MovieDetailsComponent implements OnInit {
   user: any;
   isInWatchlist = false;
   isInFavourites = false;
+  isInDatabase = false;
 
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
     private authService: AuthService,
     private watchlistService: WatchlistService,
-    private favouriteService: FavouriteService
+    private favouriteService: FavouriteService,
+    private adminMoviesService : AdminMoviesService
   ) {
     this.user = this.authService.currentUserValue?.user;
   }
@@ -47,6 +50,32 @@ export class MovieDetailsComponent implements OnInit {
             this.isInFavourites = status;
           });
         }
+      });
+    }
+  }
+
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+
+  addMovieToDatabase(): void {
+    if (this.movie) {
+      const {id, ...mediaWithoutID} = this.movie;
+      const media = {
+        ...mediaWithoutID,
+        tmdb_id: id,
+        mediaType: 'movie'
+      };
+      this.adminMoviesService.addMedia(media).subscribe(response => {
+        this.isInDatabase = true;
+      });
+    }
+  }
+
+  deleteMovieFromDatabase(): void {
+    if (this.movie) {
+      this.adminMoviesService.deleteMedia(this.movie.id).subscribe(response => {
+        this.isInDatabase = false;
       });
     }
   }
