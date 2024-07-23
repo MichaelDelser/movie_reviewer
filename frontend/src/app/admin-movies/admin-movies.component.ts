@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../services/admin.service';
-import {NgForOf} from "@angular/common";
+import { AdminMoviesService } from '../services/admin-movies.service';
+import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-admin-movies',
   templateUrl: './admin-movies.component.html',
   standalone: true,
   imports: [
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   styleUrls: ['./admin-movies.component.scss']
 })
@@ -15,14 +16,14 @@ export class AdminMoviesComponent implements OnInit {
   movies: any[] = [];
   sortOrder: { [key: string]: boolean } = { title: true, genre: true };
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminMoviesService: AdminMoviesService) {}
 
   ngOnInit() {
     this.fetchMovies();
   }
 
   fetchMovies() {
-    this.adminService.getMovies().subscribe((movies: any[]) => {
+    this.adminMoviesService.getAllMedia().subscribe((movies: any[]) => {
       this.movies = movies;
     });
   }
@@ -46,7 +47,21 @@ export class AdminMoviesComponent implements OnInit {
   }
 
   deleteMovie(movieId: string) {
-    this.adminService.deleteMovie(movieId).subscribe(() => {
+    this.adminMoviesService.deleteMedia(movieId).subscribe(() => {
+      this.fetchMovies();
+    });
+  }
+
+  blacklistMovie(movie: any) {
+    this.adminMoviesService.blacklistMedia(movie.tmdb_id).subscribe(() => {
+      movie.isBlacklisted = ! movie.isBlacklisted
+      this.fetchMovies();
+    });
+  }
+
+  unblacklistMovie(movie: any) {
+    this.adminMoviesService.unblacklistMedia(movie.tmdb_id).subscribe(() => {
+      movie.isBlacklisted = ! movie.isBlacklisted
       this.fetchMovies();
     });
   }

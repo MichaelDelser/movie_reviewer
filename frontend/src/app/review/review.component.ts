@@ -35,7 +35,7 @@ export class ReviewComponent implements OnInit {
     private reviewService: ReviewService,
     private authService: AuthService
   ) {
-    this.user = this.authService.currentUserValue?.user;
+    this.user = this.authService.currentUserValue;
   }
 
   ngOnInit(): void {

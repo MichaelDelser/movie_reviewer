@@ -28,7 +28,15 @@ export class AdminMoviesService {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 
-  blacklistMedia(id: string, blacklisted: boolean): Observable<any> {
-    return this.http.patch<any>(`${this.apiUrl}/${id}/blacklist`, { blacklisted });
+  blacklistMedia(id: string): Observable<any> {
+    return this.http.patch<any>(`${this.apiUrl}/blacklist/${id}`, {});
+  }
+
+  unblacklistMedia(id: string): Observable<any> {
+    return this.http.patch<any>(`${this.apiUrl}/unblacklist/${id}`, {});
+  }
+
+  getBlacklistedByIds(ids: string[]): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl}/blacklisted`, { ids });
   }
 }

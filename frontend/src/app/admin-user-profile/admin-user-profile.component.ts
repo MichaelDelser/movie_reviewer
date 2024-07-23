@@ -46,11 +46,11 @@ export class AdminUserProfileComponent implements OnInit {
   onSubmit(): void {
     if (this.isEditMode) {
       this.adminService.updateUser(this.userId!, this.userForm.value).subscribe(() => {
-        this.router.navigate(['/admin/users']);
+        this.router.navigate(['/admin']);
       });
     } else {
       this.adminService.createUser(this.userForm.value).subscribe(() => {
-        this.router.navigate(['/admin/users']);
+        this.router.navigate(['/admin']);
       });
     }
   }

@@ -24,8 +24,7 @@ export class AppComponent {
   constructor(public authService: AuthService) {}
 
   getUsername(): string {
-    console.log(this.authService.currentUserValue)
-    return this.authService.currentUserValue?.user?.username || '';
+    return this.authService.currentUserValue?.username || '';
   }
 
   isAdmin(): boolean {

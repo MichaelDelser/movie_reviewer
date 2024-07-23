@@ -30,21 +30,4 @@ export class AdminService {
   updateUser(userId: string, user: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/edit/${userId}`, user);
   }
-
-  // Movie CRUD operations
-  getMovies(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/admin/movies`);
-  }
-
-  createMovie(movie: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/admin/movies`, movie);
-  }
-
-  updateMovie(movieId: string, movie: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/admin/movies/${movieId}`, movie);
-  }
-
-  deleteMovie(movieId: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/admin/movies/${movieId}`);
-  }
 }

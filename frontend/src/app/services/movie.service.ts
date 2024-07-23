@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment'; // Adjust the path as needed
+import { environment } from '../../environments/environment';
+import {map} from "rxjs/operators"; // Adjust the path as needed
+import { AdminMoviesService } from './admin-movies.service';
+import {AdminService} from "./admin.service";
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +14,7 @@ export class MovieService {
   private tmdbApiKey = environment.tmdbApiKey;
   private tmdbApiUrl = environment.tmdbApiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private adminMoviesService: AdminMoviesService) {}
 
   // TMDB multi-search (search movies, TV shows, and people)
   search(query: string): Observable<any> {
@@ -20,6 +24,17 @@ export class MovieService {
         query: query
       }
     });
+  }
+
+  filterBlacklistedItems(items: any[]): Observable<any[]> {
+    const ids = items.map((item) => item.id);
+    return this.adminMoviesService.getBlacklistedByIds(ids).pipe(
+      map((blacklistedItems) => {
+        return items.filter(
+          (item) => !blacklistedItems.some((blacklistedItem) => blacklistedItem.tmdb_id === item.id)
+        );
+      })
+    );
   }
 
   // Get movie details from TMDB

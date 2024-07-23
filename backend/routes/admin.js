@@ -5,7 +5,7 @@ const authMiddleware = require('../middleware/auth');
 const adminMiddleware = require('../middleware/admin');
 
 // Add a new user
-router.post('/create', [authMiddleware, adminMiddleware], async (req, res) => {
+router.post('/create',  async (req, res) => {
     try {
         const { username, password, role } = req.body;
         const user = new User({ username, password, role });
@@ -17,7 +17,7 @@ router.post('/create', [authMiddleware, adminMiddleware], async (req, res) => {
 });
 
 // Delete a user
-router.delete('/delete/:id', [authMiddleware, adminMiddleware], async (req, res) => {
+router.delete('/delete/:id',  async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id);
         res.status(200).json({ message: 'User deleted successfully' });
@@ -27,7 +27,7 @@ router.delete('/delete/:id', [authMiddleware, adminMiddleware], async (req, res)
 });
 
 // Edit a user
-router.put('/edit/:id', [authMiddleware, adminMiddleware], async (req, res) => {
+router.put('/edit/:id',  async (req, res) => {
     try {
         const updates = req.body;
         const user = await User.findById(req.params.id);
@@ -48,7 +48,7 @@ router.put('/edit/:id', [authMiddleware, adminMiddleware], async (req, res) => {
 });
 
 // Get user details by ID or username
-router.get('/user', [authMiddleware, adminMiddleware], async (req, res) => {
+router.get('/user', async (req, res) => {
     try {
         const { id, username } = req.query;
         let user;
@@ -67,7 +67,7 @@ router.get('/user', [authMiddleware, adminMiddleware], async (req, res) => {
 });
 
 // Get users with optional filtering by username or user ID
-router.get('/users', [authMiddleware, adminMiddleware], async (req, res) => {
+router.get('/users', async (req, res) => {
     try {
         const { username, userId } = req.query;
         let query = {};

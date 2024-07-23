@@ -34,7 +34,7 @@ export class MovieDetailsComponent implements OnInit {
     private favouriteService: FavouriteService,
     private adminMoviesService : AdminMoviesService
   ) {
-    this.user = this.authService.currentUserValue?.user;
+    this.user = this.authService.currentUserValue;
   }
 
   ngOnInit(): void {
@@ -98,7 +98,9 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   addToWatchlist(): void {
+    console.log(this.user)
     if (this.user) {
+      console.log(this.user)
       this.watchlistService.addToWatchlist(this.user.id, this.movie.id, 'Movie').subscribe(() => {
         this.isInWatchlist = true;
       });

@@ -14,9 +14,9 @@ export class RoleGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     const expectedRole = route.data['role'];
-    const token = localStorage.getItem('currentUser');
-    const user = token ? JSON.parse(token).user : null;
+    const user = this.authService.getCurrentUser();
 
+    console.log(user)
     if (user && user.role === expectedRole) {
       return true;
     } else {
