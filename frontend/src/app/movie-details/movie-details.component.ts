@@ -40,17 +40,15 @@ export class MovieDetailsComponent implements OnInit {
   ngOnInit(): void {
     const movieId = this.route.snapshot.paramMap.get('id');
     if (movieId) {
-      this.movieService.getMovieDetails(+movieId).subscribe((data) => {
-        this.movie = data;
-        if (this.user) {
-          this.watchlistService.isInWatchlist(this.user.id, movieId).subscribe((status) => {
-            this.isInWatchlist = status;
-          });
-          this.favouriteService.isInFavourites(this.user.id, movieId).subscribe((status) => {
-            this.isInFavourites = status;
-          });
-        }
-      });
+      this.checkLocalDatabase(movieId);
+      if (this.user) {
+        this.watchlistService.isInWatchlist(this.user.id, movieId).subscribe((status) => {
+          this.isInWatchlist = status;
+        });
+        this.favouriteService.isInFavourites(this.user.id, movieId).subscribe((status) => {
+          this.isInFavourites = status;
+        });
+      }
     }
   }
 
@@ -66,15 +64,34 @@ export class MovieDetailsComponent implements OnInit {
         tmdb_id: id,
         mediaType: 'movie'
       };
-      this.adminMoviesService.addMedia(media).subscribe(response => {
+      this.adminMoviesService.addMedia(media).subscribe(() => {
         this.isInDatabase = true;
       });
     }
   }
 
+  checkLocalDatabase(id: string): void {
+    this.adminMoviesService.getMediaById(id).subscribe({
+      next: (data) => {
+        if (data) {
+          this.movie = data;
+          this.movie.id = this.movie.tmdb_id;
+          this.isInDatabase = true;
+        } else {
+          this.movieService.getMovieDetails(+id).subscribe((data) => {
+            this.movie = data;
+          });
+        }
+      },
+      error: () => this.movieService.getMovieDetails(+id).subscribe((data) => {
+               this.movie = data;
+             })
+    });
+  }
+
   deleteMovieFromDatabase(): void {
     if (this.movie) {
-      this.adminMoviesService.deleteMedia(this.movie.id).subscribe(response => {
+      this.adminMoviesService.deleteMedia(this.movie.id).subscribe(() => {
         this.isInDatabase = false;
       });
     }

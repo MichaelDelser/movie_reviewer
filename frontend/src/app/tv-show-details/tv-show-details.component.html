@@ -4,6 +4,8 @@
   <p>{{ tvShow.overview }}</p>
   <p>First Air Date: {{ tvShow.first_air_date | date }}</p>
   <p>Rating: {{ tvShow.vote_average }}</p>
+  <button *ngIf="isAdmin() && !isInDatabase" (click)="addTvShowToDatabase()">Add to Database</button>
+  <button *ngIf="isAdmin() && isInDatabase" (click)="deleteTvShowFromDatabase()">Delete from Database</button>
   <button *ngIf="!isInWatchlist" (click)="addToWatchlist()">Add to Watchlist</button>
   <button *ngIf="isInWatchlist" (click)="removeFromWatchlist()">Remove from Watchlist</button>
   <button *ngIf="!isInFavourites" (click)="addToFavourites()">Add to Favourites</button>

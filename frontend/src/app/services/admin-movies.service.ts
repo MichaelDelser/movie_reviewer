@@ -16,6 +16,7 @@ export class AdminMoviesService {
   }
 
   getMediaById(id: string): Observable<any> {
+    console.log('Requesting media with ID:', id); // Log the requested ID
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 

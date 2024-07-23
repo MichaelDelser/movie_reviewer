@@ -32,7 +32,7 @@ router.get('/', async (req, res) => {
 // Get media by ID
 router.get('/:id', async (req, res) => {
   try {
-    const media = await Media.findById(req.params.id);
+    const media = await Media.findOne({ tmdb_id: req.params.id });
     if (!media) {
       return res.status(404).json({ message: 'Media not found' });
     }
@@ -45,7 +45,7 @@ router.get('/:id', async (req, res) => {
 // Update media by ID
 router.put('/:id', async (req, res) => {
   try {
-    const media = await Media.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const media = await Media.findOneAndUpdate({ tmdb_id: req.params.id }, req.body, { new: true });
     if (!media) {
       return res.status(404).json({ message: 'Media not found' });
     }
