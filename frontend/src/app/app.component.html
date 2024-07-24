@@ -8,7 +8,6 @@
   <ng-template #loggedIn>
     <a mat-button [routerLink]="['/', getUsername(), 'favourites']">Favourites</a>
     <a mat-button [routerLink]="['/', getUsername(), 'watchlist']">Watchlist</a>
-    <a mat-button [routerLink]="['/', getUsername()]">{{ getUsername() }}'s Profile</a>
     <a mat-button *ngIf="isAdmin()" routerLink="/admin">Admin</a>
     <a mat-button (click)="logout()">Logout</a>
   </ng-template>
