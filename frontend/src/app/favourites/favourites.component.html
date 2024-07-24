@@ -1,11 +1,18 @@
-<div>
-  <h1>{{ username }}'s Favourites</h1>
+<div class="favourites-container">
+  <h1 class="favourites-title">{{ username }}'s Favourites</h1>
   <div *ngFor="let item of favourites" class="item-preview">
-    <a [routerLink]="[item.itemType === 'movie' ? '/movie-details' : '/tv-show-details', item.id]">
-      <img [src]="'https://image.tmdb.org/t/p/w500' + item.backdrop_path" alt="{{ item.title || item.name }}">
-      <h3>{{ item.title || item.name }}</h3>
-      <p>{{ item.overview }}</p>
+    <a [routerLink]="[item.itemType === 'movie' ? '/movie-details' : '/tv-show-details', item.itemId]" class="item-link">
+      <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" alt="{{ item.title || item.name }}" class="item-poster">
+      <div class="item-details">
+        <h3 class="item-title">{{ item.title || item.name }}</h3>
+        <p class="item-date">{{ item.release_date || item.first_air_date }}</p>
+        <p class="item-overview">{{ item.overview }}</p>
+      </div>
     </a>
-    <button (click)="removeFromFavourites(item.itemId)">Remove from Favourites</button>
+    <div class="item-actions">
+      <button (click)="removeFromFavourites(item.itemId)" class="favourite-button remove">
+        <i class="fa fa-heart"></i> Remove from Favourites
+      </button>
+    </div>
   </div>
 </div>

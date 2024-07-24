@@ -89,28 +89,28 @@ export class TvShowDetailsComponent implements OnInit {
   }
 
   addToWatchlist(): void {
-    const userId = this.authService.getCurrentUser().user.id;
-    this.watchlistService.addToWatchlist(userId, this.tvShow.id, 'TVShow').subscribe(() => {
+    const userId = this.authService.getCurrentUser().id;
+    this.watchlistService.addToWatchlist(userId, this.tvShow.id, 'tv').subscribe(() => {
       this.isInWatchlist = true;
     });
   }
 
   removeFromWatchlist(): void {
-    const userId = this.authService.getCurrentUser().user.id;
+    const userId = this.authService.getCurrentUser().id;
     this.watchlistService.removeFromWatchlist(userId, this.tvShow.id).subscribe(() => {
       this.isInWatchlist = false;
     });
   }
 
   addToFavourites(): void {
-    const userId = this.authService.getCurrentUser().user.id;
-    this.favouriteService.addToFavourites(userId, this.tvShow.id, 'TVShow').subscribe(() => {
+    const userId = this.authService.getCurrentUser().id;
+    this.favouriteService.addToFavourites(userId, this.tvShow.id, 'tv').subscribe(() => {
       this.isInFavourites = true;
     });
   }
 
   removeFromFavourites(): void {
-    const userId = this.authService.getCurrentUser().user.id;
+    const userId = this.authService.getCurrentUser().id;
     this.favouriteService.removeFromFavourites(userId, this.tvShow.id).subscribe(() => {
       this.isInFavourites = false;
     });

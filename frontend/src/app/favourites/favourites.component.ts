@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import { FavouriteService } from '../services/favourite.service'; // Adjust the path as needed
 import { AuthService } from '../services/auth.service';
-import {NgForOf} from "@angular/common"; // Adjust the path as needed
+import {NgForOf, NgIf} from "@angular/common"; // Adjust the path as needed
 import { MovieService } from '../services/movie.service';
 
 
@@ -12,7 +12,8 @@ import { MovieService } from '../services/movie.service';
   standalone: true,
   imports: [
     NgForOf,
-    RouterLink
+    RouterLink,
+    NgIf
   ],
   styleUrls: ['./favourites.component.scss']
 })
