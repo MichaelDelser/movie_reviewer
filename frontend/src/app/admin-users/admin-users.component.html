@@ -1,25 +1,25 @@
-<div>
-  <h2>Admin - Users</h2>
-  <button (click)="createUser()">Create User</button>
-  <table>
-    <thead>
-    <tr>
-      <th (click)="sortUsers('_id')">ID</th>
-      <th (click)="sortUsers('username')">Username</th>
-      <th (click)="sortUsers('role')">Role</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of users">
-      <td>{{ user._id }}</td>
-      <td>{{ user.username }}</td>
-      <td>{{ user.role }}</td>
-      <td>
-        <button (click)="editUser(user._id)">Edit</button>
-        <button (click)="deleteUser(user._id)">Delete</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+<div class="admin-dashboard">
+    <h2 class="admin-title">Admin - Users</h2>
+    <table class="admin-table">
+        <thead>
+        <tr>
+            <th (click)="sortUsers('_id')">ID</th>
+            <th (click)="sortUsers('username')">Username</th>
+            <th (click)="sortUsers('role')">Role</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{ user._id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.role }}</td>
+            <td>
+                <button class="edit-btn" (click)="editUser(user._id)">Edit</button>
+                <button class="delete-btn" (click)="deleteUser(user._id)">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <button class="create-user-btn" (click)="createUser()">Create User</button>
 </div>

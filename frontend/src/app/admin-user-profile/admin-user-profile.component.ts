@@ -1,55 +1,72 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../services/admin.service';
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {FormsModule} from "@angular/forms";
+import {MatInput} from "@angular/material/input";
+import {MatOption, MatSelect} from "@angular/material/select";
+import {MatButton} from "@angular/material/button";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-admin-user-profile',
   templateUrl: './admin-user-profile.component.html',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    MatFormField,
+    FormsModule,
+    MatInput,
+    MatSelect,
+    MatOption,
+    MatButton,
+    MatLabel,
+    NgIf
   ],
   styleUrls: ['./admin-user-profile.component.scss']
 })
 export class AdminUserProfileComponent implements OnInit {
-  userForm: FormGroup;
-  userId: string | null = null;
-  isEditMode = false;
+  username: string = '';
+  password: string = '';
+  role: string = '';
+  userId: string = '';
+  isCreateMode: boolean = false;
 
   constructor(
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private adminService: AdminService,
-    private router: Router
-  ) {
-    this.userForm = this.fb.group({
-      username: [''],
-      password: [''],
-      role: ['']
+      private route: ActivatedRoute,
+      private router: Router,
+      private adminService: AdminService
+  ) {}
+
+  ngOnInit(): void {
+    this.userId = this.route.snapshot.paramMap.get('id') || '';
+    if (this.userId) {
+      this.loadUser();
+    }
+    this.route.queryParams.subscribe(params => {
+      this.isCreateMode = params['mode'] === 'create';
     });
   }
 
-  ngOnInit(): void {
-    this.userId = this.route.snapshot.paramMap.get('id');
-    if (this.userId) {
-      this.isEditMode = true;
-      this.adminService.getUserById(this.userId).subscribe((user) => {
-        this.userForm.patchValue({
-          username: user.username,
-          role: user.role
-        });
-      });
-    }
+  loadUser(): void {
+    this.adminService.getUserById(this.userId).subscribe(user => {
+      this.username = user.username;
+      this.role = user.role;
+    });
   }
 
-  onSubmit(): void {
-    if (this.isEditMode) {
-      this.adminService.updateUser(this.userId!, this.userForm.value).subscribe(() => {
+  updateUser(): void {
+    const updatedUser = {
+      username: this.username,
+      password: this.password,
+      role: this.role
+    };
+    if(this.isCreateMode) {
+      this.adminService.createUser(updatedUser).subscribe(() => {
         this.router.navigate(['/admin']);
       });
-    } else {
-      this.adminService.createUser(this.userForm.value).subscribe(() => {
+    }
+    else {
+      this.adminService.updateUser(this.userId, updatedUser).subscribe(() => {
         this.router.navigate(['/admin']);
       });
     }

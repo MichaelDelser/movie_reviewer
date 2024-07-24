@@ -43,7 +43,8 @@ export class AdminUsersComponent implements OnInit {
   }
 
   createUser() {
-    this.router.navigate(['/admin/user-profile']);
+    this.router.navigate(['/admin/user-profile'], { queryParams: { mode: 'create' } });
+
   }
 
   editUser(userId: string) {

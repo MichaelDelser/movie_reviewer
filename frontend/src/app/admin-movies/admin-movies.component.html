@@ -1,10 +1,10 @@
-<div class="movies-container">
-  <h2>Manage Movies</h2>
-  <table>
+<div class="admin-dashboard">
+  <h2 class="admin-title">Admin - Movies</h2>
+  <table class="admin-table">
     <thead>
     <tr>
-      <th (click)="sortMovies('title')" class="sortable">Title</th>
-      <th (click)="sortMovies('genre')" class="sortable">Genre</th>
+      <th (click)="sortMovies('title')">Title</th>
+      <th (click)="sortMovies('genre')">Genre</th>
       <th>Actions</th>
     </tr>
     </thead>
@@ -13,12 +13,13 @@
       <td>{{ movie.title || movie.name }}</td>
       <td>{{ movie.genres[0].name }}</td>
       <td>
-        <button (click)="editMovie()">Edit</button>
-        <button (click)="deleteMovie(movie.tmdb_id)">Delete</button>
-        <button *ngIf="!movie.isBlacklisted" (click)="blacklistMovie(movie)">Blacklist</button>
-        <button *ngIf="movie.isBlacklisted" (click)="unblacklistMovie(movie)">Unblacklist</button>
+        <button class="edit-btn" (click)="editMovie()">Edit</button>
+        <button class="delete-btn" (click)="deleteMovie(movie.tmdb_id)">Delete</button>
+        <button *ngIf="!movie.isBlacklisted" class="blacklist-btn" (click)="blacklistMovie(movie)">Blacklist</button>
+        <button *ngIf="movie.isBlacklisted" class="unblacklist-btn" (click)="unblacklistMovie(movie)">Unblacklist</button>
       </td>
     </tr>
     </tbody>
   </table>
+  <button class="create-movie-btn" (click)="createMovie()">Create Movie</button>
 </div>

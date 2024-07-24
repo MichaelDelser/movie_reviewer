@@ -1,40 +1,74 @@
-/* admin-movies.component.css */
-.movies-container {
-  margin: 20px;
+.admin-dashboard {
+  padding: 20px;
+  background-color: #f9f9f9;
 }
 
-table {
+.admin-title {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #343a40;
+}
+
+.admin-table {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 20px;
+
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #222266;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  .sortable:after {
+    content: " \25B2\25BC";
+    font-size: 0.8em;
+  }
+
+  .edit-btn, .delete-btn, .blacklist-btn, .unblacklist-btn {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .edit-btn {
+    background-color: #2222aa;
+  }
+
+  .delete-btn {
+    background-color: #dc3545;
+  }
+
+  .blacklist-btn {
+    background-color: #333333;
+    width: 90px
+  }
+
+  .unblacklist-btn {
+    background-color: #03A9F4;
+    width: 90px
+  }
 }
 
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-th {
+.create-movie-btn {
+  background-color: #2222aa;
+  color: white;
+  padding: 10px 20px;
+  border: none;
   cursor: pointer;
-  background-color: #f2f2f2;
-}
-
-th.sortable:hover {
-  background-color: #ddd;
-}
-
-th.sortable::after {
-  content: '\25b2'; /* Unicode character for up arrow */
-  margin-left: 5px;
-  display: inline-block;
-  visibility: hidden;
-}
-
-th.sortable.asc::after {
-  content: '\25b2'; /* Unicode character for up arrow */
-  visibility: visible;
-}
-
-th.sortable.desc::after {
-  content: '\25bc'; /* Unicode character for down arrow */
-  visibility: visible;
+  display: block;
+  margin: 20px 0;
 }

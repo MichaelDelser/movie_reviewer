@@ -42,6 +42,10 @@ export class AdminMoviesComponent implements OnInit {
     });
   }
 
+  createMovie() : void {
+    //logic to create movie
+  }
+
   editMovie() {
     // Logic to edit movie
   }

@@ -1,21 +1,25 @@
-<div class="user-profile">
-  <h2>{{ isEditMode ? 'Edit User' : 'Create User' }}</h2>
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="username">Username</label>
-      <input id="username" formControlName="username" required>
-    </div>
-    <div>
-      <label for="password">Password</label>
-      <input id="password" formControlName="password" [required]="!isEditMode" placeholder="Leave blank to keep unchanged">
-    </div>
-    <div>
-      <label for="role">Role</label>
-      <select id="role" formControlName="role" required>
-        <option value="user">User</option>
-        <option value="admin">Admin</option>
-      </select>
-    </div>
-    <button type="submit">{{ isEditMode ? 'Update' : 'Create' }}</button>
-  </form>
+<div class="profile-container">
+    <h1 *ngIf="isCreateMode">Create User</h1>
+    <h1 *ngIf="!isCreateMode">Edit User</h1>
+    <form (ngSubmit)="updateUser()">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Username</mat-label>
+            <input matInput type="text" [(ngModel)]="username" name="username">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" placeholder="Leave blank to keep unchanged" [(ngModel)]="password" name="password">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Role</mat-label>
+            <mat-select [(value)]="role" [(ngModel)]="role" name="role">
+                <mat-option value="user">User</mat-option>
+                <mat-option value="admin">Admin</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="actions">
+            <button *ngIf="isCreateMode" mat-raised-button color="primary" type="submit">Create</button>
+            <button *ngIf="!isCreateMode" mat-raised-button color="primary" type="submit">Update</button>
+        </div>
+    </form>
 </div>
