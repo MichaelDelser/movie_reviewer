@@ -1,0 +1,125 @@
+.movie-details-container {
+  position: relative;
+  display: flex;
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 50, 0.5); // Dark blue overlay
+    z-index: 1;
+  }
+
+  .movie-poster {
+    z-index: 2;
+
+    img {
+      width: 300px;
+      height: auto;
+      border-radius: 10px;
+    }
+  }
+
+  .movie-info {
+    margin-left: 20px;
+    z-index: 2;
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .movie-tagline {
+      font-size: 1.2em;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .movie-meta {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .movie-actions {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .add-button {
+        background-color: #28a745;
+        color: #fff;
+      }
+
+      .remove-button {
+        background-color: #dc3545;
+        color: #fff;
+      }
+    }
+
+    .movie-overview {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+    }
+
+    .production-companies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .production-companies .company {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .production-companies .company img {
+      width: 50px;
+      height: auto;
+    }
+
+    .movie-backdrops img {
+      width: 200px;
+      height: auto;
+      margin-right: 10px;
+      border-radius: 10px;
+    }
+  }
+}
+
+.reviews-section {
+  margin-top: 40px;
+
+  h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+
+  div {
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+  }
+}

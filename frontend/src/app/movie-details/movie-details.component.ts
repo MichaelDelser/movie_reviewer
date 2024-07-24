@@ -4,7 +4,7 @@ import { MovieService } from '../services/movie.service';
 import { AuthService } from '../services/auth.service';
 import { WatchlistService } from '../services/watchlist.service';
 import { FavouriteService } from '../services/favourite.service';
-import {DatePipe, NgIf} from "@angular/common";
+import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {ReviewComponent} from "../review/review.component";
 import {AdminMoviesService} from "../services/admin-movies.service";
 
@@ -15,7 +15,8 @@ import {AdminMoviesService} from "../services/admin-movies.service";
   imports: [
     NgIf,
     ReviewComponent,
-    DatePipe
+    DatePipe,
+    NgForOf
   ],
   styleUrls: ['./movie-details.component.scss']
 })
@@ -129,5 +130,9 @@ export class MovieDetailsComponent implements OnInit {
         this.isInFavourites = false;
       });
     }
+  }
+
+  getGenreNames(): string {
+    return this.movie?.genres.map((genre: { name: string }) => genre.name).join(', ') || '';
   }
 }
