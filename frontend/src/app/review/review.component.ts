@@ -27,6 +27,7 @@ export class ReviewComponent implements OnInit {
   editingReviewTitle = '';
   editingReviewContent = '';
   editingReviewRating = 0;
+  tempEditingRating = 0;
   user: any;
   errorMessages: string[] = [];
   hasWrittenReview: boolean = false;
@@ -143,15 +144,27 @@ export class ReviewComponent implements OnInit {
     });
   }
 
-  setRating(star: number): void {
-    this.newReviewRating = star;
-  }
-
   isReviewAuthor(review: any): boolean {
     return review.user_id === this.user.id;
   }
 
   isAdmin(): boolean {
     return this.authService.isAdmin();
+  }
+
+  setTempEditingRating(rating: number) {
+    this.tempEditingRating = rating;
+  }
+
+  setEditingRating(rating: number) {
+    this.editingReviewRating = rating;
+  }
+
+  resetEditingStars() {
+    this.tempEditingRating = this.editingReviewRating;
+  }
+
+  setRating(rating: number) {
+    this.newReviewRating = rating;
   }
 }

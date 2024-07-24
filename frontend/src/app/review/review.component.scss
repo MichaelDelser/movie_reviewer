@@ -1,20 +1,131 @@
-.stars {
-  display: flex;
-  justify-content: flex-end;
+.reviews {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
-  input[type="radio"] {
-    display: none;
+  h2 {
+    text-align: center;
+    color: #333;
   }
 
-  label {
-    font-size: 1.5em;
-    color: lightgray;
-    cursor: pointer;
+  .error-messages {
+    color: red;
+    margin-bottom: 10px;
   }
 
-  label:hover,
-  label:hover ~ label,
-  input[type="radio"]:checked ~ label {
-    color: gold;
+  .review {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+    .review-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      h3 {
+        margin: 0;
+      }
+
+      .stars {
+        .star {
+          font-size: 20px;
+          color: #ccc;
+
+          &.filled {
+            color: #f39c12;
+          }
+        }
+      }
+    }
+
+    .review-content {
+      margin: 10px 0;
+      color: #666;
+    }
+
+    .review-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      button {
+        margin-left: 10px;
+      }
+    }
+
+    .edit-review {
+      margin-top: 10px;
+
+      input,
+      textarea {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .stars {
+        display: flex;
+
+        .star {
+          font-size: 20px;
+          color: #ccc;
+          cursor: pointer;
+
+          &.filled {
+            color: #f39c12;
+          }
+        }
+      }
+
+      button {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .add-review {
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+    h3 {
+      text-align: center;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .stars {
+      display: flex;
+
+      input {
+        display: none;
+      }
+
+      label {
+        cursor: pointer;
+        font-size: 20px;
+        color: #ccc;
+
+        &.filled {
+          color: #f39c12;
+        }
+      }
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+    }
   }
 }

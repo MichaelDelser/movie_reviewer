@@ -4,21 +4,31 @@
     <div *ngFor="let errorMessage of errorMessages">{{ errorMessage }}</div>
   </div>
   <div *ngFor="let review of reviews" class="review">
-    <h3>{{ review.title }}</h3>
-    <p>Rating: {{ review.rating }}</p>
-    <p>{{ review.content }}</p>
-    <p>Upvotes: {{ review.upvotesCount }}</p>
-    <button *ngIf="!review.hasUpvoted && !isReviewAuthor(review)" (click)="upvoteReview(review._id)">Upvote</button>
-    <button *ngIf="review.hasUpvoted" disabled>Already Upvoted</button>
-    <button *ngIf="isReviewAuthor(review)" (click)="editReview(review)">Edit</button>
-    <button *ngIf="isAdmin() || isReviewAuthor(review)" (click)="removeReview(review._id)">Remove</button>
+    <div class="review-header">
+      <h3>{{ review.title }}</h3>
+      <div class="stars">
+        <ng-container *ngFor="let star of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; let i = index">
+          <span class="star" [class.filled]="i + 1 <= review.rating">★</span>
+        </ng-container>
+      </div>
+    </div>
+    <p class="review-content">{{ review.content }}</p>
+    <p class="review-footer">
+      <span>Upvotes: {{ review.upvotesCount }}</span>
+      <button *ngIf="!review.hasUpvoted && !isReviewAuthor(review)" (click)="upvoteReview(review._id)">Upvote</button>
+      <button *ngIf="review.hasUpvoted" disabled>Already Upvoted</button>
+      <button *ngIf="isReviewAuthor(review)" (click)="editReview(review)">Edit</button>
+      <button *ngIf="isAdmin() || isReviewAuthor(review)" (click)="removeReview(review._id)">Remove</button>
+    </p>
 
     <div *ngIf="editingReviewId === review._id" class="edit-review">
       <input type="text" [(ngModel)]="editingReviewTitle" placeholder="Review Title">
-      <div class="stars">
-        <ng-container *ngFor="let star of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
-          <input type="radio" [id]="'editStar' + star" name="editRating" [(ngModel)]="editingReviewRating" [value]="star">
-          <label [for]="'editStar' + star" (click)="editingReviewRating = star">★</label>
+      <div class="stars" (mouseleave)="resetEditingStars()">
+        <ng-container *ngFor="let star of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; let i = index">
+          <span class="star"
+                [class.filled]="i + 1 <= editingReviewRating || i + 1 <= tempEditingRating"
+                (mouseover)="setTempEditingRating(i + 1)"
+                (click)="setEditingRating(i + 1)">★</span>
         </ng-container>
       </div>
       <textarea [(ngModel)]="editingReviewContent" placeholder="Edit your review..."></textarea>

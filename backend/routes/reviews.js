@@ -44,6 +44,24 @@ router.get('/:content_type/:content_id', async (req, res, next) => {
   }
 });
 
+// Update a review by ID
+router.put('/update/:id', async (req, res) => {
+  try {
+    const reviewId = req.params.id;
+    const updatedReview = await Review.findByIdAndUpdate(
+        reviewId,
+        { $set: req.body },
+        { new: true, runValidators: true }
+    );
+    if (!updatedReview) {
+      return res.status(404).json({ message: 'Review not found' });
+    }
+    res.status(200).json(updatedReview);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Upvote a review
 router.patch('/upvote/:review_id', async (req, res, next) => {
   const { review_id } = req.params;
