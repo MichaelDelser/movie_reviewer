@@ -1,35 +1,38 @@
 <div class="movie-details-container" [style.background-image]="'url(https://image.tmdb.org/t/p/w1280' + movie.backdrop_path + ')'">
-    <div class="overlay"></div>
+  <div class="overlay"></div>
+  <div class="content-wrapper">
     <div class="movie-poster">
-        <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}" />
+      <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}" />
     </div>
     <div class="movie-info">
-        <h1>{{ movie.title }} ({{ movie.release_date | date:'yyyy' }})</h1>
-        <p class="movie-tagline">{{ movie.tagline }}</p>
-        <div class="movie-meta">
-            <span>{{ movie.release_date | date }}</span>
-            <span>{{ movie.runtime }} min</span>
-            <span>{{ getGenreNames() }}</span>
+      <h1>{{ movie.title }} ({{ movie.release_date | date:'yyyy' }})</h1>
+      <p class="movie-tagline">{{ movie.tagline }}</p>
+      <div class="movie-meta">
+        <span>{{ movie.release_date | date }}</span>
+        <span>{{ movie.runtime }} min</span>
+        <span>{{ getGenreNames(movie.genres) }}</span>
+      </div>
+      <div class="movie-actions">
+        <button (click)="addToFavourites()" *ngIf="!isInFavourites" class="add-button">Add to Favourites</button>
+        <button (click)="removeFromFavourites()" *ngIf="isInFavourites" class="remove-button">Remove from Favourites</button>
+        <button (click)="addToWatchlist()" *ngIf="!isInWatchlist" class="add-button">Add to Watchlist</button>
+        <button (click)="removeFromWatchlist()" *ngIf="isInWatchlist" class="remove-button">Remove from Watchlist</button>
+        <button *ngIf="isAdmin() && !isInDatabase" (click)="addMovieToDatabase()" class="add-db-button">Add to Database</button>
+        <button *ngIf="isAdmin() && isInDatabase" (click)="deleteMovieFromDatabase()" class="remove-db-button">Remove from Database</button>
+      </div>
+      <p class="movie-overview">{{ movie.overview }}</p>
+      <h3>Production Companies</h3>
+      <div class="production-companies">
+        <div *ngFor="let company of movie.production_companies" class="company">
+          <img *ngIf="company.logo_path" [src]="'https://image.tmdb.org/t/p/w500' + company.logo_path" alt="{{ company.name }}" />
+          <span>{{ company.name }}</span>
         </div>
-        <div class="movie-actions">
-            <button (click)="addToFavourites()" *ngIf="!isInFavourites" class="add-button">Add to Favourites</button>
-            <button (click)="removeFromFavourites()" *ngIf="isInFavourites" class="remove-button">Remove from Favourites</button>
-            <button (click)="addToWatchlist()" *ngIf="!isInWatchlist" class="add-button">Add to Watchlist</button>
-            <button (click)="removeFromWatchlist()" *ngIf="isInWatchlist" class="remove-button">Remove from Watchlist</button>
-        </div>
-        <p class="movie-overview">{{ movie.overview }}</p>
-        <h3>Production Companies</h3>
-        <div class="production-companies">
-            <div *ngFor="let company of movie.production_companies" class="company">
-                <img *ngIf="company.logo_path" [src]="'https://image.tmdb.org/t/p/w500' + company.logo_path" alt="{{ company.name }}" />
-                <span>{{ company.name }}</span>
-            </div>
-        </div>
-        <h3>Backdrops</h3>
-        <div class="movie-backdrops">
-            <img *ngFor="let backdrop of movie.backdrops" [src]="'https://image.tmdb.org/t/p/w500' + backdrop.file_path" alt="{{ movie.title }}" />
-        </div>
+      </div>
+      <h3>Backdrops</h3>
+      <div class="movie-backdrops">
+        <img *ngFor="let backdrop of movie.backdrops" [src]="'https://image.tmdb.org/t/p/w500' + backdrop.file_path" alt="{{ movie.title }}" />
+      </div>
     </div>
+  </div>
 </div>
 <app-review [contentId]="movie.id" [contentType]="'Movie'"></app-review>
-

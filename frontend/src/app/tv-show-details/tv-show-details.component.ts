@@ -6,7 +6,7 @@ import { AuthService } from '../services/auth.service';
 import { WatchlistService } from '../services/watchlist.service';
 import { FavouriteService } from '../services/favourite.service';
 import {ReviewComponent} from "../review/review.component";
-import {DatePipe, NgIf} from "@angular/common";
+import {DatePipe, NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-tv-show-details',
@@ -15,12 +15,14 @@ import {DatePipe, NgIf} from "@angular/common";
   imports: [
     ReviewComponent,
     NgIf,
-    DatePipe
+    DatePipe,
+    NgForOf
   ],
   styleUrls: ['./tv-show-details.component.scss']
 })
 export class TvShowDetailsComponent implements OnInit {
   tvShow: any;
+  user: any;
   isInDatabase = false;
   isInWatchlist = false;
   isInFavourites = false;
@@ -32,17 +34,34 @@ export class TvShowDetailsComponent implements OnInit {
     private authService: AuthService,
     private watchlistService: WatchlistService,
     private favouriteService: FavouriteService
-  ) {}
+  ) {
+    this.user = this.authService.currentUserValue;
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.checkLocalDatabase(id);
+      this.user = this.authService.getCurrentUser()
+      if (this.user) {
+        this.watchlistService.isInWatchlist(this.user.id, id).subscribe((status) => {
+          this.isInWatchlist = status;
+        });
+        this.favouriteService.isInFavourites(this.user.id, id).subscribe((status) => {
+          this.isInFavourites = status;
+        });
+      }
+
     }
+
   }
 
   isAdmin(): boolean {
     return this.authService.isAdmin();
+  }
+
+  getGenreNames(genres: any[]): string {
+    return genres.map(genre => genre.name).join(', ');
   }
 
   checkLocalDatabase(id: string): void {

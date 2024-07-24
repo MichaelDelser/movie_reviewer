@@ -1,15 +1,38 @@
-<div *ngIf="tvShow">
-  <h1>{{ tvShow.name }}</h1>
-  <img [src]="'https://image.tmdb.org/t/p/w500' + tvShow.poster_path" alt="{{ tvShow.name }}">
-  <p>{{ tvShow.overview }}</p>
-  <p>First Air Date: {{ tvShow.first_air_date | date }}</p>
-  <p>Rating: {{ tvShow.vote_average }}</p>
-  <button *ngIf="isAdmin() && !isInDatabase" (click)="addTvShowToDatabase()">Add to Database</button>
-  <button *ngIf="isAdmin() && isInDatabase" (click)="deleteTvShowFromDatabase()">Delete from Database</button>
-  <button *ngIf="!isInWatchlist" (click)="addToWatchlist()">Add to Watchlist</button>
-  <button *ngIf="isInWatchlist" (click)="removeFromWatchlist()">Remove from Watchlist</button>
-  <button *ngIf="!isInFavourites" (click)="addToFavourites()">Add to Favourites</button>
-  <button *ngIf="isInFavourites" (click)="removeFromFavourites()">Remove from Favourites</button>
-
-  <app-review [contentId]="tvShow.id" [contentType]="'TVShow'"></app-review>
+<div class="tv-show-details-container" [style.background-image]="'url(https://image.tmdb.org/t/p/w1280' + tvShow.backdrop_path + ')'">
+  <div class="overlay"></div>
+  <div class="content-wrapper">
+    <div class="tv-show-poster">
+      <img [src]="'https://image.tmdb.org/t/p/w500' + tvShow.poster_path" alt="{{ tvShow.name }}" />
+    </div>
+    <div class="tv-show-info">
+      <h1>{{ tvShow.name }} ({{ tvShow.first_air_date | date:'yyyy' }})</h1>
+      <p class="tv-show-tagline">{{ tvShow.tagline }}</p>
+      <div class="tv-show-meta">
+        <span>{{ tvShow.first_air_date | date }}</span>
+        <span>{{ tvShow.vote_average }}</span>
+        <span>{{ getGenreNames(tvShow.genres) }}</span>
+      </div>
+      <div class="tv-show-actions">
+        <button (click)="addToFavourites()" *ngIf="!isInFavourites" class="add-button">Add to Favourites</button>
+        <button (click)="removeFromFavourites()" *ngIf="isInFavourites" class="remove-button">Remove from Favourites</button>
+        <button (click)="addToWatchlist()" *ngIf="!isInWatchlist" class="add-button">Add to Watchlist</button>
+        <button (click)="removeFromWatchlist()" *ngIf="isInWatchlist" class="remove-button">Remove from Watchlist</button>
+        <button *ngIf="isAdmin() && !isInDatabase" (click)="addTvShowToDatabase()" class="add-button">Add to Database</button>
+        <button *ngIf="isAdmin() && isInDatabase" (click)="deleteTvShowFromDatabase()" class="remove-button">Remove from Database</button>
+      </div>
+      <p class="tv-show-overview">{{ tvShow.overview }}</p>
+      <h3>Production Companies</h3>
+      <div class="production-companies">
+        <div *ngFor="let company of tvShow.production_companies" class="company">
+          <img *ngIf="company.logo_path" [src]="'https://image.tmdb.org/t/p/w500' + company.logo_path" alt="{{ company.name }}" />
+          <span>{{ company.name }}</span>
+        </div>
+      </div>
+      <h3>Backdrops</h3>
+      <div class="tv-show-backdrops">
+        <img *ngFor="let backdrop of tvShow.backdrops" [src]="'https://image.tmdb.org/t/p/w500' + backdrop.file_path" alt="{{ tvShow.name }}" />
+      </div>
+    </div>
+  </div>
 </div>
+<app-review [contentId]="tvShow.id" [contentType]="'TVShow'"></app-review>

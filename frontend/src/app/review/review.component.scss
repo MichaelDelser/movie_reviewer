@@ -1,14 +1,8 @@
 .reviews {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
   h2 {
-    text-align: center;
-    color: #333;
+    font-size: 24px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   .error-messages {
@@ -17,115 +11,152 @@
   }
 
   .review {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
 
     .review-header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-
-      h3 {
-        margin: 0;
-      }
 
       .stars {
-        .star {
-          font-size: 20px;
-          color: #ccc;
+        display: flex;
+        margin-left: 10px;
+        margin-bottom: 10px;
 
+        .star {
+          color: #ddd;
+          font-size: 20px;
           &.filled {
-            color: #f39c12;
+            color: #ffc107;
           }
         }
+      }
+
+      .review-title {
+        font-weight: bold;
+        font-size: 20px;
       }
     }
 
     .review-content {
-      margin: 10px 0;
-      color: #666;
+      margin: 10px -0;
     }
 
     .review-footer {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .review-actions {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 10px;
 
       button {
-        margin-left: 10px;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+
+        &.edit-button {
+          background-color: #007bff;
+          color: #fff;
+        }
+        &.remove-button {
+          background-color: #dc3545;
+          color: #fff;
+        }
       }
     }
 
     .edit-review {
       margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
 
-      input,
-      textarea {
-        width: 100%;
-        margin-bottom: 10px;
+      input, textarea {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
       }
 
       .stars {
         display: flex;
 
         .star {
+          color: #ddd;
           font-size: 20px;
-          color: #ccc;
           cursor: pointer;
-
           &.filled {
-            color: #f39c12;
+            color: #ffc107;
           }
         }
       }
 
-      button {
-        margin-right: 10px;
+      .edit-actions {
+        display: flex;
+        gap: 10px;
+
+        button {
+          padding: 5px 10px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 14px;
+          &.update-button {
+            background-color: #28a745;
+            color: #fff;
+          }
+          &.cancel-button {
+            background-color: #dc3545;
+            color: #fff;
+          }
+        }
       }
     }
   }
 
   .add-review {
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-
+    margin-top: 20px;
     h3 {
-      text-align: center;
+      font-size: 20px;
+      margin-bottom: 10px;
     }
 
-    input,
-    textarea {
+    input, textarea {
       width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
       margin-bottom: 10px;
     }
 
     .stars {
       display: flex;
 
-      input {
-        display: none;
-      }
-
-      label {
-        cursor: pointer;
+      .star {
+        color: #ddd;
         font-size: 20px;
-        color: #ccc;
-
+        cursor: pointer;
         &.filled {
-          color: #f39c12;
+          color: #ffc107;
         }
       }
     }
 
-    button {
-      display: block;
-      width: 100%;
-      margin-top: 10px;
+    .submit-button {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
     }
   }
 }

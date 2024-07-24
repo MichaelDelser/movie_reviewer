@@ -63,7 +63,9 @@ router.put('/update/:id', async (req, res) => {
 });
 
 // Upvote a review
-router.patch('/upvote/:review_id', async (req, res, next) => {
+router.patch('/upvote/:review_id', [
+  check('user_id').notEmpty().withMessage('User ID is required'),
+], async (req, res, next) => {
   const { review_id } = req.params;
   const { user_id } = req.body;
 
@@ -93,6 +95,7 @@ router.patch('/upvote/:review_id', async (req, res, next) => {
 
     res.json(review);
   } catch (err) {
+    console.log(err);
     next(err);
   }
 });

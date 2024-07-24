@@ -132,7 +132,7 @@ export class MovieDetailsComponent implements OnInit {
     }
   }
 
-  getGenreNames(): string {
-    return this.movie?.genres.map((genre: { name: string }) => genre.name).join(', ') || '';
+  getGenreNames(genres: any[]): string {
+    return genres.map(genre => genre.name).join(', ');
   }
 }

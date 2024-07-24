@@ -27,8 +27,9 @@ export class ReviewService {
     return this.http.delete(`${this.apiUrl}/remove/${reviewId}`, { body: { userId } });
   }
 
-  upvoteReview(userId: string, reviewId: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/upvote`, { userId, reviewId });
+  upvoteReview(user_id: string, reviewId: string): Observable<any> {
+    console.log(user_id);
+    return this.http.patch(`${this.apiUrl}/upvote/${reviewId}`, { user_id });
   }
 
   hasUpvoted(userId: string, reviewId: string): Observable<any> {

@@ -31,6 +31,7 @@ export class ReviewComponent implements OnInit {
   user: any;
   errorMessages: string[] = [];
   hasWrittenReview: boolean = false;
+  tempRating: number = 0;
 
   constructor(
     private reviewService: ReviewService,
@@ -47,9 +48,10 @@ export class ReviewComponent implements OnInit {
     this.reviewService.getReviews(this.contentType, this.contentId).subscribe((reviews) => {
       this.reviews = reviews;
       this.reviews.forEach((review) => {
-        review.upvotesCount = review.upvotesCount || 0; // Ensure upvotesCount is a number
+        console.log(review);
+        review.upvotesCount = review.helpfulness || 0; // Ensure upvotesCount is a number
         this.reviewService.hasUpvoted(this.user.id, review._id).subscribe((hasUpvoted) => {
-          review.hasUpvoted = hasUpvoted;
+          review.hasUpvoted = hasUpvoted.hasUpvoted;
         });
 
         if (review.user_id === this.user.id) {
@@ -83,7 +85,6 @@ export class ReviewComponent implements OnInit {
     this.editingReviewTitle = review.title;
     this.editingReviewContent = review.content;
     this.editingReviewRating = review.rating;
-    console.log('editReview:', this.editingReviewId, this.editingReviewTitle, this.editingReviewContent, this.editingReviewRating); // Debug log
   }
 
   updateReview(): void {
@@ -135,13 +136,18 @@ export class ReviewComponent implements OnInit {
         const review = this.reviews.find((r) => r._id === reviewId);
         if (review) {
           review.hasUpvoted = true;
-          review.upvotesCount = response.upvotesCount; // Update with the correct count from the backend
+          review.upvotesCount = response.helpfulness; // Update with the correct count from the backend
         }
       },
       error: (error) => {
         this.errorMessages = error.error.errors || [error.error];
       }
     });
+  }
+
+  upvoteAllowed(review: any): boolean {
+    if(review.hasUpvoted == true) return false;
+    return review.user_id != this.user.id;
   }
 
   isReviewAuthor(review: any): boolean {
@@ -166,5 +172,12 @@ export class ReviewComponent implements OnInit {
 
   setRating(rating: number) {
     this.newReviewRating = rating;
+  }
+  setTempRating(rating: number) {
+    this.tempRating = rating;
+  }
+
+  resetStars() {
+    this.tempRating = 0;
   }
 }
