@@ -26,7 +26,6 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    console.log(this.currentUserValue)
     return this.currentUserValue?.token || null;
   }
 
