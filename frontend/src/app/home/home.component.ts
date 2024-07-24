@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SearchBarComponent} from "../search-bar/search-bar.component";
-import {MatCard} from "@angular/material/card"; // Adjust the path as needed
+import {MatCard} from "@angular/material/card";
+import {NgForOf} from "@angular/common"; // Adjust the path as needed
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,8 @@ import {MatCard} from "@angular/material/card"; // Adjust the path as needed
   standalone: true,
   imports: [
     SearchBarComponent,
-    MatCard
+    MatCard,
+    NgForOf
   ],
   styleUrls: ['./home.component.scss']
 })

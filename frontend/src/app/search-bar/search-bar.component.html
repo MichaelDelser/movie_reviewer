@@ -2,17 +2,23 @@
   <input
     type="text"
     [(ngModel)]="query"
-    placeholder="Search for a movie or TV show..."
+    placeholder="Search for a movie, TV show, person..."
     (keyup.enter)="onSearch()"
   />
   <button (click)="onSearch()">Search</button>
 </div>
-<div class="movie-results">
-  <div *ngFor="let item of results" class="movie-card">
-    <a (click)="viewDetails(item)">
-      <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" alt="{{ item.title || item.name }}">
-      <h3>{{ item.title || item.name }}</h3>
-      <p>{{ item.release_date || item.first_air_date | date }}</p>
-    </a>
+<div class="results-container" *ngIf="paginatedResults && paginatedResults.length">
+  <div class="movie-results">
+    <div *ngFor="let item of paginatedResults" class="movie-card">
+      <a (click)="viewDetails(item)">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" alt="{{ item.title || item.name }}">
+        <h3>{{ item.title || item.name }}</h3>
+        <p>{{ item.release_date || item.first_air_date | date }}</p>
+      </a>
+    </div>
+  </div>
+  <div class="pagination">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+    <button (click)="nextPage()" [disabled]="currentPage === Math.ceil(results.length / itemsPerPage)">Next</button>
   </div>
 </div>
