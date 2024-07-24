@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import {FormsModule} from "@angular/forms";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {MatButton} from "@angular/material/button";
+import {MatAnchor, MatButton} from "@angular/material/button";
 import {NgIf} from "@angular/common"; // Adjust the path as needed
 
 @Component({
@@ -17,7 +17,9 @@ import {NgIf} from "@angular/common"; // Adjust the path as needed
     MatInput,
     MatButton,
     MatLabel,
-    NgIf
+    NgIf,
+    MatAnchor,
+    RouterLink
   ],
   styleUrls: ['./sign-up.component.scss']
 })
