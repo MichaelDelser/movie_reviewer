@@ -8,6 +8,10 @@ import {MovieService} from "./movie.service"; // Adjust the path as needed
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Service for managing favourites.
+ * Handles adding and removing items from user's favourites.
+ */
 export class FavouriteService {
   private apiUrl = environment.apiUrl;
 

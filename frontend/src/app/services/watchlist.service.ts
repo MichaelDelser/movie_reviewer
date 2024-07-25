@@ -8,6 +8,10 @@ import {MovieService} from "./movie.service"; // Adjust the path as needed
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Service for managing watchlist.
+ * Handles adding, removing, and fetching items in the user's watchlist.
+ */
 export class WatchlistService {
   private apiUrl = environment.apiUrl;
 

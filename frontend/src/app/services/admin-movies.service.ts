@@ -6,6 +6,11 @@ import {environment} from "../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Service for managing admin movie operations.
+ * Includes adding, deleting, and updating movies in the database.
+ */
+
 export class AdminMoviesService {
   private apiUrl = environment.apiUrl+'/media'; // Adjust this based on your backend route
 

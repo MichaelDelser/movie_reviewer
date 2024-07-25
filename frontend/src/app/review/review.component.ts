@@ -15,6 +15,10 @@ import {NgForOf, NgIf} from "@angular/common";
   ],
   styleUrls: ['./review.component.scss']
 })
+/**
+ * Component for displaying and submitting reviews.
+ * Handles review submission and displays existing reviews.
+ */
 export class ReviewComponent implements OnInit {
   @Input() contentId!: string;
   @Input() contentType!: string;

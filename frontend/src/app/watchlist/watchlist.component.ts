@@ -21,6 +21,11 @@ import {map} from "rxjs/operators";
   ],
   styleUrls: ['./watchlist.component.scss']
 })
+/**
+ * Component for managing user's watchlist.
+ * Displays movies and TV shows in the watchlist.
+ * Allows filtering and removal of items from the watchlist.
+ */
 export class WatchlistComponent implements OnInit {
   watchlistItems: any[] = [];
   filteredWatchlistItems: any[] = [];

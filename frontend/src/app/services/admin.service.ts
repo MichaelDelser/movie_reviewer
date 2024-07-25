@@ -6,6 +6,10 @@ import {environment} from "../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Service for admin-related operations.
+ * Manages admin functionalities like user roles.
+ */
 export class AdminService {
   private apiUrl = environment.apiUrl+"/admin";
 

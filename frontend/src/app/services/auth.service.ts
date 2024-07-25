@@ -7,6 +7,10 @@ import { environment } from '../../environments/environment'; // Adjust the path
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Service for authentication.
+ * Handles login, signup, logout, and user authentication state.
+ */
 export class AuthService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;

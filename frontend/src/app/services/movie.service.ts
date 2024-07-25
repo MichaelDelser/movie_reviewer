@@ -4,12 +4,15 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import {map} from "rxjs/operators"; // Adjust the path as needed
 import { AdminMoviesService } from './admin-movies.service';
-import {AdminService} from "./admin.service";
 
 
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Service for movie-related operations.
+ * Fetches movie details, search results, and other movie data.
+ */
 export class MovieService {
   private tmdbApiKey = environment.tmdbApiKey;
   private tmdbApiUrl = environment.tmdbApiUrl;

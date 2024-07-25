@@ -23,6 +23,11 @@ import {NgIf} from "@angular/common"; // Adjust the path as needed
   ],
   styleUrls: ['./sign-up.component.scss']
 })
+/**
+ * Component for user sign-up.
+ * Provides form for user registration and handles form submission.
+ * Displays error messages for password mismatch and registration errors.
+ */
 export class SignUpComponent {
   username: string = '';
   password: string = '';

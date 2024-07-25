@@ -20,6 +20,11 @@ import {DatePipe, NgForOf, NgIf} from "@angular/common";
   ],
   styleUrls: ['./tv-show-details.component.scss']
 })
+/**
+ * Component for displaying TV show details.
+ * Includes TV show information, actions (add/remove to favourites and watchlist),
+ * and production companies and backdrops.
+ */
 export class TvShowDetailsComponent implements OnInit {
   tvShow: any;
   user: any;

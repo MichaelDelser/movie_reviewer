@@ -6,6 +6,10 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Service for managing reviews.
+ * Handles fetching, submitting, and managing reviews for content.
+ */
 export class ReviewService {
   private apiUrl = `${environment.apiUrl}/reviews`;
 
