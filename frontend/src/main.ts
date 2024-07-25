@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { routes } from './app/app.routes';
 import { provideRouter } from '@angular/router';
-import { AuthInterceptor } from './app/auth.interceptor';
+import { AuthInterceptor } from './app/interceptors/auth.interceptor';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {environment} from "./environments/environment";
