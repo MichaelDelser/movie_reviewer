@@ -18,6 +18,11 @@ import {RouterLink, RouterOutlet} from "@angular/router"; // Import AuthService
   ],
   styleUrls: ['./app.component.scss']
 })
+/**
+ * Root component of the application.
+ * Manages the main layout and routing.
+ * Handles user authentication and navigation.
+ */
 export class AppComponent {
   title = 'movie-app'; // App title
 

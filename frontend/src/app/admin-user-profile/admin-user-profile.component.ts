@@ -24,6 +24,10 @@ import {NgIf} from "@angular/common";
   ],
   styleUrls: ['./admin-user-profile.component.scss']
 })
+/**
+ * Component for managing admin user profiles.
+ * Displays user profile information and allows editing of user details.
+ */
 export class AdminUserProfileComponent implements OnInit {
   username: string = '';
   password: string = '';

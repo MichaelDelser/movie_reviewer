@@ -17,6 +17,11 @@ import { MovieService } from '../services/movie.service';
   ],
   styleUrls: ['./favourites.component.scss']
 })
+/**
+ * Component for managing user's favourites.
+ * Displays favourite movies and TV shows.
+ * Allows removal of items from favourites.
+ */
 export class FavouritesComponent implements OnInit {
   favourites: any[] = [];
   username: string = '';

@@ -14,6 +14,11 @@ import {NgForOf} from "@angular/common"; // Adjust the path as needed
   ],
   styleUrls: ['./home.component.scss']
 })
+/**
+ * Component for the home page.
+ * Displays welcome message and search bar.
+ * Provides navigation to other parts of the application.
+ */
 export class HomeComponent implements OnInit {
 
   constructor() {}

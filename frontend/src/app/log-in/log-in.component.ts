@@ -21,6 +21,11 @@ import {NgIf} from "@angular/common"; // Adjust the path as needed
   ],
   styleUrls: ['./log-in.component.scss']
 })
+/**
+ * Component for user login.
+ * Provides form for user login and handles form submission.
+ * Displays error messages for login failures.
+ */
 export class LogInComponent {
   username: string = '';
   password: string = '';

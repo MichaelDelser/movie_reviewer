@@ -20,6 +20,11 @@ import {AdminMoviesService} from "../services/admin-movies.service";
   ],
   styleUrls: ['./movie-details.component.scss']
 })
+/**
+ * Component for displaying movie details.
+ * Includes movie information, actions (add/remove to favourites and watchlist),
+ * and production companies and backdrops.
+ */
 export class MovieDetailsComponent implements OnInit {
   movie: any;
   user: any;

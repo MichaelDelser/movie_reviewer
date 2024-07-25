@@ -12,6 +12,11 @@ import {NgForOf} from "@angular/common";
   ],
   styleUrls: ['./admin-users.component.scss']
 })
+/**
+ * Component for managing admin users.
+ * Displays a list of users and provides actions to manage user roles.
+ */
+
 export class AdminUsersComponent implements OnInit {
   users: any[] = [];
   sortOrder: { [key: string]: boolean } = { _id: true, username: true, role: true };

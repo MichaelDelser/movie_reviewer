@@ -16,4 +16,8 @@ import {AdminMoviesComponent} from "../admin-movies/admin-movies.component";
   ],
   styleUrls: ['./admin.component.scss']
 })
+/**
+ * Main component for admin functionalities.
+ * Provides navigation and access to various admin sections like users and movies.
+ */
 export class AdminComponent { }

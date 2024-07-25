@@ -13,6 +13,11 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {environment} from "./environments/environment";
 import {enableProdMode} from "@angular/core";
 
+/**
+ * Main entry point for Angular application.
+ * Bootstraps the AppModule to start the application.
+ */
+
 if (environment.production) {
   enableProdMode();
 }

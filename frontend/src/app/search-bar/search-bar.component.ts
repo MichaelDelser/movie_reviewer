@@ -29,6 +29,10 @@ import {MatIcon} from "@angular/material/icon"; // Adjust the path as needed
   ],
   styleUrls: ['./search-bar.component.scss']
 })
+/**
+ * Component for searching movies and TV shows.
+ * Handles search input and displays search results with pagination.
+ */
 export class SearchBarComponent {
   query: string = '';
   results: any[] = [];

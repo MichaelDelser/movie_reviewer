@@ -12,6 +12,10 @@ import {NgForOf, NgIf} from "@angular/common";
   ],
   styleUrls: ['./admin-movies.component.scss']
 })
+/**
+ * Component for managing admin movies.
+ * Displays a list of movies and provides actions to add, edit, or delete movies.
+ */
 export class AdminMoviesComponent implements OnInit {
   movies: any[] = [];
   sortOrder: { [key: string]: boolean } = { title: true, genre: true };
