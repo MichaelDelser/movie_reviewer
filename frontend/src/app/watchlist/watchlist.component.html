@@ -1,26 +1,37 @@
 <div class="watchlist-container">
-  <h1 class="watchlist-title">{{ username }}'s Watchlist</h1>
-  <div class="watchlist-tabs">
-    <button (click)="filterType('movie')" [class.active]="filter === 'movie'">Movies {{ getCount('movie') }}</button>
-    <button (click)="filterType('tv')" [class.active]="filter === 'tv'">TV {{ getCount('tv') }}</button>
+  <!-- Background with overlay -->
+  <div class="background">
+    <div class="overlay"></div>
   </div>
-  <div *ngFor="let item of filteredWatchlistItems" class="item-preview">
-    <a [routerLink]="[item.itemType === 'movie' ? '/movie-details' : '/tv-show-details', item.itemId]" class="item-link">
-      <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" alt="{{ item.title || item.name }}" class="item-poster">
-      <div class="item-details">
-        <h3 class="item-title">{{ item.title || item.name }}</h3>
-        <p class="item-date">{{ item.release_date || item.first_air_date }}</p>
-        <p class="item-overview">{{ item.overview }}</p>
+  <!-- Content area -->
+  <div class="content">
+    <!-- Watchlist title -->
+    <h1 class="watchlist-title">{{ username }}'s Watchlist</h1>
+    <!-- Filter buttons -->
+    <div class="watchlist-tabs">
+      <button (click)="filterType('movie')" [class.active]="filter === 'movie'">Movies {{ getCount('movie') }}</button>
+      <button (click)="filterType('tv')" [class.active]="filter === 'tv'">TV {{ getCount('tv') }}</button>
+    </div>
+    <!-- Watchlist items -->
+    <div *ngFor="let item of filteredWatchlistItems" class="item-preview">
+      <a [routerLink]="[item.itemType === 'movie' ? '/movie-details' : '/tv-show-details', item.itemId]" class="item-link">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" alt="{{ item.title || item.name }}" class="item-poster">
+        <div class="item-details">
+          <h3 class="item-title">{{ item.title || item.name }}</h3>
+          <p class="item-date">{{ item.release_date || item.first_air_date }}</p>
+          <p class="item-overview">{{ item.overview }}</p>
+        </div>
+      </a>
+      <!-- Action buttons -->
+      <div class="item-actions">
+        <button (click)="removeFromWatchlist(item.itemId)" class="action-button">Watched ✔</button>
+        <button *ngIf="!isFavourite(item.itemId)" (click)="addToFavourites(item.itemId, item.itemType)" class="favourite-button add">
+          <i class="fa fa-heart-o"></i> Add to Favourites
+        </button>
+        <button *ngIf="isFavourite(item.itemId)" (click)="removeFromFavourites(item.itemId)" class="favourite-button remove">
+          <i class="fa fa-heart"></i> Remove from Favourites
+        </button>
       </div>
-    </a>
-    <div class="item-actions">
-      <button (click)="removeFromWatchlist(item.itemId)" class="action-button">Watched ✔</button>
-      <button *ngIf="!isFavourite(item.itemId)" (click)="addToFavourites(item.itemId, item.itemType)" class="favourite-button add">
-        <i class="fa fa-heart-o"></i> Add to Favourites
-      </button>
-      <button *ngIf="isFavourite(item.itemId)" (click)="removeFromFavourites(item.itemId)" class="favourite-button remove">
-        <i class="fa fa-heart"></i> Remove from Favourites
-      </button>
     </div>
   </div>
 </div>

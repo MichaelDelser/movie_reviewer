@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'; // Import Component
 import { AuthService } from './services/auth.service';
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatAnchor} from "@angular/material/button";
 import {NgIf} from "@angular/common";
-import {RouterLink, RouterOutlet} from "@angular/router";
-import {MatLabel} from "@angular/material/form-field"; // Adjust the path as needed
+import {RouterLink, RouterOutlet} from "@angular/router"; // Import AuthService
 
 @Component({
   selector: 'app-root',
@@ -13,7 +12,6 @@ import {MatLabel} from "@angular/material/form-field"; // Adjust the path as nee
   imports: [
     MatToolbar,
     MatAnchor,
-    MatLabel,
     NgIf,
     RouterLink,
     RouterOutlet
@@ -21,16 +19,21 @@ import {MatLabel} from "@angular/material/form-field"; // Adjust the path as nee
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(public authService: AuthService) {}
+  title = 'movie-app'; // App title
 
-  getUsername(): string {
-    return this.authService.currentUserValue?.username || '';
+  constructor(protected authService: AuthService) { }
+
+  // Get username
+  getUsername() {
+    return this.authService.getCurrentUser().username;
   }
 
-  isAdmin(): boolean {
+  // Check if admin
+  isAdmin() {
     return this.authService.isAdmin();
   }
 
+  // Logout user
   logout() {
     this.authService.logout();
   }

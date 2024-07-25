@@ -1,17 +1,27 @@
 <mat-toolbar color="primary">
+  <!-- Home link -->
   <a mat-button routerLink="/home">Home</a>
+  <!-- Spacer for alignment -->
   <span class="spacer"></span>
+  <!-- Check authentication -->
   <ng-container *ngIf="!authService.isAuthenticated(); else loggedIn">
+    <!-- Login link -->
     <a mat-button routerLink="/login">Log In</a>
+    <!-- Signup link -->
     <a mat-button routerLink="/signup">Sign Up</a>
   </ng-container>
   <ng-template #loggedIn>
+    <!-- Favourites link -->
     <a mat-button [routerLink]="['/', getUsername(), 'favourites']">Favourites</a>
+    <!-- Watchlist link -->
     <a mat-button [routerLink]="['/', getUsername(), 'watchlist']">Watchlist</a>
+    <!-- Admin link if admin -->
     <a mat-button *ngIf="isAdmin()" routerLink="/admin">Admin</a>
+    <!-- Logout link -->
     <a mat-button (click)="logout()">Logout</a>
   </ng-template>
 </mat-toolbar>
+<!-- App container for routing -->
 <div class="app-container">
   <router-outlet></router-outlet>
 </div>
