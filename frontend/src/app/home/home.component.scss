@@ -1,31 +1,39 @@
 .home-container {
   position: relative;
   height: 100vh;
-  background-image: url('/path/to/your/background/image.jpg'); /* Update with the correct path */
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-  text-align: center;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+  background: url('../../../public/Cinema.jpg') no-repeat center center fixed; /* Add your background image */
+  background-size: cover;
 
-  .overlay {
+  .background {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(100, 100, 100, 0.3); /* Semi-transparent overlay */
+    }
   }
 
   .content {
     position: relative;
-    z-index: 2;
+    z-index: 2; /* Ensure content is above the overlay */
+    text-align: center;
+    color: #fff;
+    max-width: 800px;
     padding: 20px;
-    margin-top: 5vh; /* Move the content up to 15% of the screen height */
 
     h1 {
       font-size: 3rem;
