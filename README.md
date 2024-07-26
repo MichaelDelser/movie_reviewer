@@ -256,46 +256,55 @@ heroku config:set KEY=VALUE
 ## Features
 
 - User Authentication and Authorization
-    - Sign up
+  ### Sign up
   ![img_3.png](img_3.png)
-      - Contains elements to enter username, enter password (shows stars), confirm birthday (stars), sign-up and Cancel (navigate to login screen)
-      - Form Validation: Checks if username and password is present and password has at least 6 characters
-      - Encryption: Uses bcrypt library to generate a salt and encrypt the password
-      - Token Generation: Uses JWT-Token to create a auth-token after successful registration
-      - Automatic Login: After successful registrations new users are automatically logged in
-      - Error Messages: Backend Provides useful error messages, frontend used to show them under the respective element but that got lost when trying to resolve a different bug during development
-    - Log in
+     - Contains elements to enter username, enter password (shows stars), confirm birthday (stars), sign-up and Cancel (navigate to login screen)
+     - Form Validation: Checks if username and password is present and password has at least 6 characters
+     - Encryption: Uses bcrypt library to generate a salt and encrypt the password
+     - Token Generation: Uses JWT-Token to create a auth-token after successful registration
+     - Automatic Login: After successful registrations new users are automatically logged in
+     - Error Messages: Backend Provides useful error messages, frontend used to show them under the respective element but that got lost when trying to resolve a different bug during development
+  ### Log in
   ![img.png](img.png)
-      - Contains elements to enter username and password, submit them and a link in the greeting text that sends the user to the sign-up screen
-      - Form Validation: Checks if username and password is present
-      - Encryption: Uses bcrypt to compared the entered password without ever exposing it
-      - Token Generation: Uses JWT-Token to create a auth-token after successful registration
-      - Error Messages: Backend Provides useful error messages, frontend used to show them under the respective element but that got lost when trying to resolve a different bug during development
-    - Log out
-      - Logged in users always see the button to log out
-      - Discards the user token and navigates back to the home screen
-- Browsing Movies and TV Shows
-    - Home
+     - Contains elements to enter username and password, submit them and a link in the greeting text that sends the user to the sign-up screen
+     - Form Validation: Checks if username and password is present
+     - Encryption: Uses bcrypt to compared the entered password without ever exposing it
+     - Token Generation: Uses JWT-Token to create a auth-token after successful registration
+     - Error Messages: Backend Provides useful error messages, frontend used to show them under the respective element but that got lost when trying to resolve a different bug during development
+  ### Log out 
+  - Logged in users always see the button to log out
+  - Discards the user token and navigates back to the home screen
+  ### Home
   ![img_2.png](img_2.png)
-      - All pages show a navigation bar at the top, containing home, Log in, Sign up for browsers, Favourites, Watchlist, Log out for users and Favourites, Watchlist, Admin, Log out for admins
-      - All pages show a disclaimer at the bottom to properly give credit to TMDB for using their database API
-      - The Homepage shows a themed background image, a welcome text and a searchbar where the user can search for Movies and TV Shows
+     - All pages show a navigation bar at the top, containing home, Log in, Sign up for browsers, Favourites, Watchlist, Log out for users and Favourites, Watchlist, Admin, Log out for admins
+     - All pages show a disclaimer at the bottom to properly give credit to TMDB for using their database API
+     - The Homepage shows a themed background image, a welcome text and a searchbar where the user can search for Movies and TV Shows
   ![img_4.png](img_4.png)
-      - Movies are then displayed, together with their Name and Release Date. These images are clickable and lead the user to the details page of that movie
-      - Users are shown pages of results and can navigate back and forth using buttons
-    - Movies- and TV-Show Details
+     - Movies are then displayed, together with their Name and Release Date. These images are clickable and lead the user to the details page of that movie
+     - Users are shown pages of results and can navigate back and forth using buttons
+  ### Movies- and TV-Show Details
   ![img_5.png](img_5.png)
-      - The Details Page shows general details of a movie or TV show, including title, release date, catchphase and story, length, genre, production companies with logos, a poster and a backdrop image if availiable.
-      - It would show a choice of backdrops to select but that feature is not finished yet.
-      - Additionally users see buttons to add/remove the title to their watchlist and favourites, admins see the button to add/remove the title to the local database which allows them to perform admin actions on that movie.
-      - Below the details, there is a reviews section
-    - Reviews
+     - The Details Page shows general details of a movie or TV show, including title, release date, catchphase and story, length, genre, production companies with logos, a poster and a backdrop image if availiable.
+     - It would show a choice of backdrops to select but that feature is not finished yet.
+     - Additionally users see buttons to add/remove the title to their watchlist and favourites, admins see the button to add/remove the title to the local database which allows them to perform admin actions on that movie.
+     - Below the details, there is a reviews section
+  ### Reviews
   ![img_7.png](img_7.png)
-      - Browsers can see existing comments, a review consists of the title, th rating displayed as colored stars and the optional review text. An extra feature is the upvote system where users can upvote reviews if they found it helpful. Browsers can see these upvotes too
-      - Users can additionally Upvote existing movies that were created by other users. They can also add their own review to a movie. 
-    - Favourites
-    - Watchlist
-- A
+     - Browsers can see existing comments, a review consists of the title, th rating displayed as colored stars and the optional review text. An extra feature is the upvote system where users can upvote reviews if they found it helpful. Browsers can see these upvotes too
+     - Users can add their own review to a movie. Title and rating is required and is marked as such. The rating is displayed as stars, mouseovering over these stars will highlight them and clicking will select a rating.
+     - Users can additionally upvote existing reviews that were created by other users.
+     ![img_8.png](img_8.png)
+     - Users can edit their review by clicking the edit button, upvotes will persist.
+     - Admin users can delete reviews by clicking the remove button
+  ### Favourites
+  ![img_9.png](img_9.png)
+  ### Watchlist
+### Admin
+  ### Admin-Users 
+
+  ### Admin-User-Profile
+
+  ### Admin-Movies
 
 ## Database 
 ### MongoDB Atlas Cluster 
