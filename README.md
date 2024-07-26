@@ -4,6 +4,17 @@ Screenjudge is a single-page web application for browsing, reviewing, and managi
 Screenjudge is hosted with netlify and is availiable online on https://screenjudge.netlify.app     
 The backend server is hosted with heroku and is availiable at https://safe-bastion-69310-45fc38dfab9b.herokuapp.com
 
+To access the website, you can log in using the following credentials:
+#### User Role:
+- Username: user
+- Password: password
+
+#### Admin Role:
+- Username: admin
+- Password: password
+
+Feel free to create new users, comments and reviews.
+
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
@@ -532,19 +543,6 @@ Use the following command to create a backup of your MongoDB database:
 mongodump --uri="mongodb+srv://reviewServer:XZ6LIP3WEyR4OeFV@moviereviewer.7hbib0b.mongodb.net/?retryWrites=true&w=majority&appName=movieReviewer" --out=/path/to/backup/directory
 ```
 Replace /path/to/backup/directory with the path where you want to save the backup.
-
-## User Credentials
-To access the website, you can log in using the following credentials:
-
-### User Role:
-
-- Username: user
-- Password: password
-
-### Admin Role:
-
-- Username: admin
-- Password: password
 
 
 ## Deployment
