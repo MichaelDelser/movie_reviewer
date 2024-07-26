@@ -275,8 +275,14 @@ heroku config:set KEY=VALUE
       - Logged in users always see the button to log out
       - Discards the user token and navigates back to the home screen
 - Browsing Movies and TV Shows
-    - Search
+    - Home
   ![img_2.png](img_2.png)
+      - All pages show a navigation bar at the top, containing home, Log in, Sign up for browsers, Favourites, Watchlist, Log out for users and Favourites, Watchlist, Admin, Log out for admins
+      - All pages show a disclaimer at the bottom to properly give credit to TMDB for using their database API
+      - The Homepage shows a themed background image, a welcome text and a searchbar where the user can search for Movies and TV Shows
+      ![img_4.png](img_4.png)
+      - Movies are then displayed, together with their Name and Release Date. These images are clickable and lead the user to the details page of that movie
+      - Users are shown pages of results and can navigate back and forth using buttons
     - Movies- and TV-Show Details
     - Reviews
     - Favourites
