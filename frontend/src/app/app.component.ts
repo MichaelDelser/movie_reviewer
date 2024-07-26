@@ -3,7 +3,7 @@ import { AuthService } from './services/auth.service';
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatAnchor} from "@angular/material/button";
 import {NgIf} from "@angular/common";
-import {RouterLink, RouterOutlet} from "@angular/router"; // Import AuthService
+import {Router, RouterLink, RouterOutlet} from "@angular/router"; // Import AuthService
 
 @Component({
   selector: 'app-root',
@@ -26,7 +26,7 @@ import {RouterLink, RouterOutlet} from "@angular/router"; // Import AuthService
 export class AppComponent {
   title = 'movie-app'; // App title
 
-  constructor(protected authService: AuthService) { }
+  constructor(protected authService: AuthService, private router: Router) { }
 
   // Get username
   getUsername() {
@@ -41,5 +41,6 @@ export class AppComponent {
   // Logout user
   logout() {
     this.authService.logout();
+    this.router.navigate(['/home']);
   }
 }

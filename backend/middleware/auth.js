@@ -8,11 +8,8 @@ module.exports = async (req, res, next) => {
   }
 
   try {
-    console.log("debug0")
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("debug1")
     const user = await User.findById(decoded.id);
-    console.log("debug2")
     if (!user) {
       throw new Error();
     }
