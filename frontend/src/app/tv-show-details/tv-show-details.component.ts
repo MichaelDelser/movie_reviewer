@@ -61,6 +61,9 @@ export class TvShowDetailsComponent implements OnInit {
 
   }
 
+  isAuthenticated(): boolean {
+    return !!this.authService.getToken();
+  }
   isAdmin(): boolean {
     return this.authService.isAdmin();
   }

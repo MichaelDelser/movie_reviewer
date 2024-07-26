@@ -12,7 +12,7 @@
         <span>{{ movie.runtime }} min</span>
         <span>{{ getGenreNames(movie.genres) }}</span>
       </div>
-      <div class="movie-actions">
+      <div *ngIf="isAuthenticated()" class="movie-actions">
         <button (click)="addToFavourites()" *ngIf="!isInFavourites" class="add-button">Add to Favourites</button>
         <button (click)="removeFromFavourites()" *ngIf="isInFavourites" class="remove-button">Remove from Favourites</button>
         <button (click)="addToWatchlist()" *ngIf="!isInWatchlist" class="add-button">Add to Watchlist</button>

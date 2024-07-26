@@ -280,11 +280,18 @@ heroku config:set KEY=VALUE
       - All pages show a navigation bar at the top, containing home, Log in, Sign up for browsers, Favourites, Watchlist, Log out for users and Favourites, Watchlist, Admin, Log out for admins
       - All pages show a disclaimer at the bottom to properly give credit to TMDB for using their database API
       - The Homepage shows a themed background image, a welcome text and a searchbar where the user can search for Movies and TV Shows
-      ![img_4.png](img_4.png)
+  ![img_4.png](img_4.png)
       - Movies are then displayed, together with their Name and Release Date. These images are clickable and lead the user to the details page of that movie
       - Users are shown pages of results and can navigate back and forth using buttons
     - Movies- and TV-Show Details
+  ![img_5.png](img_5.png)
+      - The Details Page shows general details of a movie or TV show, including title, release date, catchphase and story, length, genre, production companies with logos, a poster and a backdrop image if availiable.
+      - It would show a choice of backdrops to select but that feature is not finished yet.
+      - Additionally users see buttons to add/remove the title to their watchlist and favourites, admins see the button to add/remove the title to the local database which allows them to perform admin actions on that movie.
+      - Below the details, there is a reviews section
     - Reviews
+  ![img_7.png](img_7.png)
+      - Users can see 
     - Favourites
     - Watchlist
 - A

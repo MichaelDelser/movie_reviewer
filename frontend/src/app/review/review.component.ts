@@ -158,6 +158,10 @@ export class ReviewComponent implements OnInit {
     return review.user_id === this.user.id;
   }
 
+  isAuthenticated(): boolean {
+    return !!this.authService.getToken();
+  }
+
   isAdmin(): boolean {
     return this.authService.isAdmin();
   }
