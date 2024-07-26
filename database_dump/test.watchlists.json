@@ -1,0 +1,112 @@
+[{
+  "_id": {
+    "$oid": "6698fca6b4ed8fef6060b4f6"
+  },
+  "userId": {
+    "$oid": "6691303ec1b3f08294e066ff"
+  },
+  "itemId": "63351",
+  "itemType": "tv",
+  "addedAt": {
+    "$date": "2024-07-18T11:29:42.157Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66990b470e2107e32a699d70"
+  },
+  "userId": {
+    "$oid": "6691303ec1b3f08294e066ff"
+  },
+  "itemId": "519182",
+  "itemType": "movie",
+  "addedAt": {
+    "$date": "2024-07-18T12:32:07.182Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a10abd0d7ba8ebbb37f105"
+  },
+  "userId": {
+    "$oid": "6693f6a38411ec24d6d34c29"
+  },
+  "itemId": "299534",
+  "itemType": "movie",
+  "addedAt": {
+    "$date": "2024-07-24T14:07:57.153Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a11ee90d7ba8ebbb383ab0"
+  },
+  "userId": {
+    "$oid": "6693f6a38411ec24d6d34c29"
+  },
+  "itemId": "519182",
+  "itemType": "movie",
+  "addedAt": {
+    "$date": "2024-07-24T15:34:01.683Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a17f7712196006e6736798"
+  },
+  "userId": {
+    "$oid": "6693f6a38411ec24d6d34c29"
+  },
+  "itemId": "63351",
+  "itemType": "tv",
+  "addedAt": {
+    "$date": "2024-07-24T22:25:59.121Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a2c45f12196006e6736d46"
+  },
+  "userId": {
+    "$oid": "66a2bce512196006e6736c24"
+  },
+  "itemId": "519182",
+  "itemType": "movie",
+  "addedAt": {
+    "$date": "2024-07-25T21:32:15.753Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a3450c664a7015add309eb"
+  },
+  "userId": {
+    "$oid": "6691303ec1b3f08294e066ff"
+  },
+  "itemId": "585",
+  "itemType": "movie",
+  "addedAt": {
+    "$date": "2024-07-26T06:41:16.821Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a36069664a7015add30d5b"
+  },
+  "userId": {
+    "$oid": "6693f6a38411ec24d6d34c29"
+  },
+  "itemId": "1396",
+  "itemType": "tv",
+  "addedAt": {
+    "$date": "2024-07-26T08:38:01.227Z"
+  },
+  "__v": 0
+}]

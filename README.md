@@ -1,6 +1,8 @@
 # Documentation: "Screenjudge"
 
 Screenjudge is a single-page web application for browsing, reviewing, and managing movies and TV shows. The app is built with Node.js, Angular, and MongoDB.
+Screenjudge is hosted with netlify and is availiable online on https://screenjudge.netlify.app     
+The backend server is hosted with heroku and is availiable at https://safe-bastion-69310-45fc38dfab9b.herokuapp.com
 
 ## Table of Contents
 
@@ -76,6 +78,7 @@ Follow these steps to set up the project locally:
     ```
 
    The frontend server will start on `http://localhost:4200`.
+   You might have to change the apiUrl variable in /environment/environments to `http://localhost:4200`.
 
 ## Project Structure
 
@@ -257,7 +260,7 @@ heroku config:set KEY=VALUE
 
 - User Authentication and Authorization
   ### Sign up
-  ![img_3.png](img_3.png)
+  ![/readme_images/img_3.png](/readme_images/img_3.png)
      - Contains elements to enter username, enter password (shows stars), confirm birthday (stars), sign-up and Cancel (navigate to login screen)
      - Form Validation: Checks if username and password is present and password has at least 6 characters
      - Encryption: Uses bcrypt library to generate a salt and encrypt the password
@@ -265,7 +268,7 @@ heroku config:set KEY=VALUE
      - Automatic Login: After successful registrations new users are automatically logged in
      - Error Messages: Backend Provides useful error messages, frontend used to show them under the respective element but that got lost when trying to resolve a different bug during development
   ### Log in
-  ![img.png](img.png)
+  ![/readme_images/img.png](/readme_images/img.png)
      - Contains elements to enter username and password, submit them and a link in the greeting text that sends the user to the sign-up screen
      - Form Validation: Checks if username and password is present
      - Encryption: Uses bcrypt to compared the entered password without ever exposing it
@@ -275,41 +278,69 @@ heroku config:set KEY=VALUE
   - Logged in users always see the button to log out
   - Discards the user token and navigates back to the home screen
   ### Home
-  ![img_2.png](img_2.png)
+  ![/readme_images/img_2.png](/readme_images/img_2.png)
      - All pages show a navigation bar at the top, containing home, Log in, Sign up for browsers, Favourites, Watchlist, Log out for users and Favourites, Watchlist, Admin, Log out for admins
      - All pages show a disclaimer at the bottom to properly give credit to TMDB for using their database API
      - The Homepage shows a themed background image, a welcome text and a searchbar where the user can search for Movies and TV Shows
-  ![img_4.png](img_4.png)
+  ![/readme_images/img_4.png](/readme_images/img_4.png)
      - Movies are then displayed, together with their Name and Release Date. These images are clickable and lead the user to the details page of that movie
      - Users are shown pages of results and can navigate back and forth using buttons
   ### Movies- and TV-Show Details
-  ![img_5.png](img_5.png)
+  ![/readme_images/img_5.png](/readme_images/img_5.png)
      - The Details Page shows general details of a movie or TV show, including title, release date, catchphase and story, length, genre, production companies with logos, a poster and a backdrop image if availiable.
      - It would show a choice of backdrops to select but that feature is not finished yet.
      - Additionally users see buttons to add/remove the title to their watchlist and favourites, admins see the button to add/remove the title to the local database which allows them to perform admin actions on that movie.
      - Below the details, there is a reviews section
   ### Reviews
-  ![img_7.png](img_7.png)
+  ![/readme_images/img_7.png](/readme_images/img_7.png)
      - Browsers can see existing comments, a review consists of the title, th rating displayed as colored stars and the optional review text. An extra feature is the upvote system where users can upvote reviews if they found it helpful. Browsers can see these upvotes too
      - Users can add their own review to a movie. Title and rating is required and is marked as such. The rating is displayed as stars, mouseovering over these stars will highlight them and clicking will select a rating.
      - Users can additionally upvote existing reviews that were created by other users.
-     ![img_8.png](img_8.png)
+     ![/readme_images/img_8.png](/readme_images/img_8.png)
      - Users can edit their review by clicking the edit button, upvotes will persist.
      - Admin users can delete reviews by clicking the remove button
   ### Favourites
-  ![img_9.png](img_9.png)
+  ![/readme_images/img_9.png](/readme_images/img_9.png)
+  - The favourites lists all the users favourite movies and shows in one page, together with some information
+  - Users can remove them with the click of a button if they don't like the movie anymore
   ### Watchlist
-### Admin
-  ### Admin-Users 
-
+  ![/readme_images/img_10.png](/readme_images/img_10.png)
+  - The watchlist is similar, but with the difference that media is split into movies and tv shows for clarity.
+  - Users can add movies to the favourites if they like the movie and mark them as watched to remove them from the watchlist
+  - Since marking them as watched is reaching the goal of watching the movies in this case, the button is not red but blue
+## Admin
+![/readme_images/img_11.png](/readme_images/img_11.png)
+  - The admin page contains simply a tabview, separated in different areas of the website
+  - This allows to easily add more
+  - There is a plan to add a report system for users, movies and reviews, this could not be implemented in time but admins would manage them through a page in the third tab of this page
+  ### Admin-Users
+  ![/readme_images/img_12.png](/readme_images/img_12.png)
+  - This shows a table of all users, displaying userID, username and user role. The table can be sorted by clicking on the column headers.
+  - Admins have the option to delete a user by clicking the delete button.
+  - Clicking Create or Edit on one of the users navigates to the admin-user-profile page
   ### Admin-User-Profile
-
+  ![/readme_images/img_16.png](/readme_images/img_16.png)
+  -  Here Admins can create users similar to the sign up screen, however admins can choose role for the users.
+  ![/readme_images/img_14.png](/readme_images/img_14.png)
+  - When coming here to edit one of the users, the users data will be imported. Admins can promote other users to admin this way.
+  - Because the password is treated in a secure way it won't be shown at all, if not edited it will stay as it was.
+  - Labels are also changed from create to edit
   ### Admin-Movies
-
+  ![/readme_images/img_13.png](/readme_images/img_13.png)
+  - The movies section of the admin page shows all the  movies that have been added to the local database.
+  - Because we don't want to alter TMDB's online database we can add titles to our own database which saves all the information about the title and allows us to edit them locally.
+  - If a title exists locally search results will use the local data over TMDB's API data to display them.
+  - Blacklisted movies won't be shown at all
+  - The create and Edit function could not be completed in time and the buttons dont have any logic behind them.
 ## Database 
 ### MongoDB Atlas Cluster 
 The application uses a MongoDB Atlas cluster, which can be accessed with the MONGODB_URI environment variable.
 
+```ruby
+MONGODB_URI=mongodb+srv://reviewServer:XZ6LIP3WEyR4OeFV@moviereviewer.7hbib0b.mongodb.net/?retryWrites=true&w=majority&appName=movieReviewer
+````
+
+To get an overview of the Database, download MongoDBCompass and enter this URI to connect to the database.
 
 ## Database Schemas
 ### User Schema
@@ -356,7 +387,137 @@ const reviewSchema = new mongoose.Schema({
 });
 ```
 
+### Upvote Schema
+```javascript
+const upvoteSchema = new mongoose.Schema({
+  reviewId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Review',
+    required: true
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  }
+}, {
+  timestamps: true
+});
+```
+### Media Schema
+```javascript
+const MediaSchema = new Schema({
+  adult: { type: Boolean, default: false },
+  backdrop_path: { type: String },
+  belongs_to_collection: {
+    id: { type: Number },
+    name: { type: String },
+    poster_path: { type: String },
+    backdrop_path: { type: String }
+  },
+  budget: { type: Number },
+  genres: [{ id: { type: Number }, name: { type: String } }],
+  homepage: { type: String },
+  tmdb_id: { type: Number, required: true },
+  imdb_id: { type: String },
+  origin_country: [{ type: String }],
+  original_language: { type: String },
+  original_title: { type: String },
+  original_name: { type: String },
+  overview: { type: String },
+  popularity: { type: Number },
+  poster_path: { type: String },
+  production_companies: [{
+    id: { type: Number },
+    logo_path: { type: String },
+    name: { type: String },
+    origin_country: { type: String }
+  }],
+  production_countries: [{ iso_3166_1: { type: String }, name: { type: String } }],
+  release_date: { type: String },
+  revenue: { type: Number },
+  runtime: { type: Number },
+  spoken_languages: [{ english_name: { type: String }, iso_639_1: { type: String }, name: { type: String } }],
+  status: { type: String },
+  tagline: { type: String },
+  title: { type: String },
+  video: { type: Boolean, default: false },
+  vote_average: { type: Number },
+  vote_count: { type: Number },
+  created_by: [{
+    id: { type: Number },
+    credit_id: { type: String },
+    name: { type: String },
+    original_name: { type: String },
+    gender: { type: Number },
+    profile_path: { type: String }
+  }],
+  episode_run_time: [{ type: Number }],
+  first_air_date: { type: String },
+  in_production: { type: Boolean },
+  languages: [{ type: String }],
+  last_air_date: { type: String },
+  last_episode_to_air: {
+    id: { type: Number },
+    name: { type: String },
+    overview: { type: String },
+    vote_average: { type: Number },
+    vote_count: { type: Number },
+    air_date: { type: String },
+    episode_number: { type: Number },
+    episode_type: { type: String },
+    production_code: { type: String },
+    runtime: { type: Number },
+    season_number: { type: Number },
+    show_id: { type: Number },
+    still_path: { type: String }
+  },
+  name: { type: String },
+  next_episode_to_air: { type: Schema.Types.Mixed },
+  networks: [{
+    id: { type: Number },
+    logo_path: { type: String },
+    name: { type: String },
+    origin_country: { type: String }
+  }],
+  number_of_episodes: { type: Number },
+  number_of_seasons: { type: Number },
+  seasons: [{
+    air_date: { type: String },
+    episode_count: { type: Number },
+    id: { type: Number },
+    name: { type: String },
+    overview: { type: String },
+    poster_path: { type: String },
+    season_number: { type: Number },
+    vote_average: { type: Number }
+  }],
+  mediaType: { type: String, enum: ['movie', 'tv'], required: true },
+  isBlacklisted: { type: Boolean, default: false }
+});
+```
+
+### Report Schema
+Reports are not yet implemented in the frontend
+```javascript
+const reportSchema = new mongoose.Schema({
+  reference_id: { type: mongoose.Schema.Types.ObjectId, required: true, index: true },
+  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
+  reason: {
+    type: String,
+    required: [true, 'Reason is required'],
+    minlength: [10, 'Reason must be at least 10 characters long'],
+    maxlength: [500, 'Reason cannot exceed 500 characters']
+  },
+  created_at: { type: Date, default: Date.now },
+  updated_at: { type: Date, default: Date.now }
+});
+```
+
 ### Getting a Database Dump
+
+A database dump is available in the /database_dump/ folder.
+
 To create a backup of your MongoDB Atlas database, you can use the mongodump utility, which is part of the MongoDB Database Tools. Follow these steps:
 
 Install MongoDB Database Tools:
@@ -377,17 +538,17 @@ To access the website, you can log in using the following credentials:
 
 ### User Role:
 
-Username: user,
-Password: password
+- Username: user
+- Password: password
 
 ### Admin Role:
 
-Username: admin
-Password: password
+- Username: admin
+- Password: password
 
 
 ## Deployment
-Frontend (Netlify)
+### Frontend (Netlify)
 Connect GitHub Repository:
 
 Go to Netlify and connect your GitHub repository.
@@ -401,17 +562,17 @@ Environment Variables:
 
 Add apiUrl with the value https://safe-bastion-69310-45fc38dfab9b.herokuapp.com.
 
-## Backend (Heroku)
-### Create a Heroku App:
+### Backend (Heroku)
+#### Create a Heroku App:
 
 Go to Heroku and create a new app.
 Connect your GitHub repository.
 Set Environment Variables:
 
 Set JWT_SECRET and MONGODB_URI in the Heroku app settings.
-### Deploy:
+### Development:
 
-Deploy the backend code to Heroku by navigating to the backend directory and typing
+To further develop the backend code to Heroku by navigating to the backend directory and typing
 
 ```shell
 git add .
@@ -426,3 +587,52 @@ Contributions are welcome! Please follow these steps to contribute:
 - Create a new branch for your feature or bug fix.
 - Commit your changes and push them to your forked repository.
 - Create a pull request to the main repository.
+
+## Project timeline
+
+- 3.7.2024 - Received assigment
+- 3.7 - 10.7: Analysis Phase
+  - Analysis of project requirements.
+  - Installation of Angular, Node.js, MongoDB, Git
+  - Getting to know Heroku and Stackblitz
+- 10.7 - 13.7: Planning Phase
+  - Creating the database model
+  - Creating a rough page layout
+  - Signing up to Amazon AWS and TMDB
+- 14.7 - 22.7: Development phase
+  - Setting up database
+  - Setting up the server, connecting to the database
+  - Setting up database models in node.js
+  - Setting up routing 
+  - Starting frontend development, first in stackblitz, later developing using webmaster
+  - Parallel development of front and backend to extend the backend api if needed
+  - Continuous deployment through Heroku and Netlify, both services are linked to the github repository
+- 22.7 - 25.7: Final touch ups
+  - Added file comments
+  - Improved the visual representation by editing the html and scss without changing functionality
+- 25.7 - 26.7: Documentation and final bugfixes
+  - Wrote this documentation
+  - Final user testing and bugfixing
+- 26.7, 2 pm: Submitting the project
+
+## Reflections on the Project
+
+All in all the project was very interesting. It was a much greater challenge than expected but also a lot of fun.
+
+
+#### Challenges:
+
+It was difficult to gain acces to the Amazon AWS service because the sign up to the API required a working URL which I didn't have at the time. As an alternative I used the TMDB API which worked great and was free to use as long as they are given proper credit.
+Using stackblitz also posed some difficulties which is the reason the project was re-set up using webmaster.
+Stackblitz worked well to set up the project initially, 
+however getting a website online using stackblitz was not possible. 
+The re set up was a major setback but getting a single working github project lead to successfully hosting the heroku and netlify service.
+
+During later development a repository reset lead to unvoluntarily deleting some backend progress which cost valuable time.
+Towards the end the authentification method changed, not sure how but it was necessary to debug and rework the authentification process.
+Also error messages aren't displayed the same way as before, however there was no more time to fix that before meeting the assignment deadline.
+#### Lessons learned:
+Being unfamiliar with the tools lead to the application needing a couple of reworks, which caused quite a bit of stress.
+Despite the difficulties, the experiences made with Angular, Node, MongoDB, Heroku, partially Stackblitz and Netlify were well worth the effort.
+In conclusion the project was a great challenge but one that was fun to overcome and brought valuable knowledge for future, real world application.
+It probably would have been fun to actually do it as a group project.

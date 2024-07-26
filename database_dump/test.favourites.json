@@ -1,0 +1,140 @@
+[{
+  "_id": {
+    "$oid": "6698fca7b4ed8fef6060b4f8"
+  },
+  "userId": {
+    "$oid": "6691303ec1b3f08294e066ff"
+  },
+  "itemId": "63351",
+  "itemType": "tv",
+  "addedAt": {
+    "$date": "2024-07-18T11:29:43.236Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "669905ebcc465245a8c3a284"
+  },
+  "userId": {
+    "$oid": "6691303ec1b3f08294e066ff"
+  },
+  "itemId": "519182",
+  "itemType": "movie",
+  "addedAt": {
+    "$date": "2024-07-18T12:09:15.480Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a17ea312196006e6736761"
+  },
+  "userId": {
+    "$oid": "6693f6a38411ec24d6d34c29"
+  },
+  "itemId": "519182",
+  "itemType": "movie",
+  "addedAt": {
+    "$date": "2024-07-24T22:22:27.169Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a1808412196006e6736826"
+  },
+  "userId": {
+    "$oid": "6693f6a38411ec24d6d34c29"
+  },
+  "itemId": "597",
+  "itemType": "movie",
+  "addedAt": {
+    "$date": "2024-07-24T22:30:28.240Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a2bb5e12196006e6736c19"
+  },
+  "userId": {
+    "$oid": "6695768f14d6e5da55231f1d"
+  },
+  "itemId": "39272",
+  "itemType": "tv",
+  "addedAt": {
+    "$date": "2024-07-25T20:53:50.437Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a2be3912196006e6736c64"
+  },
+  "userId": {
+    "$oid": "66a2bce512196006e6736c24"
+  },
+  "itemId": "852",
+  "itemType": "movie",
+  "addedAt": {
+    "$date": "2024-07-25T21:06:01.830Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a2bf9712196006e6736cee"
+  },
+  "userId": {
+    "$oid": "66a2bce512196006e6736c24"
+  },
+  "itemId": "525",
+  "itemType": "movie",
+  "addedAt": {
+    "$date": "2024-07-25T21:11:51.857Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a2c40112196006e6736d11"
+  },
+  "userId": {
+    "$oid": "66a2bce512196006e6736c24"
+  },
+  "itemId": "519182",
+  "itemType": "movie",
+  "addedAt": {
+    "$date": "2024-07-25T21:30:41.871Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a35d64664a7015add30ce9"
+  },
+  "userId": {
+    "$oid": "6691303ec1b3f08294e066ff"
+  },
+  "itemId": "585",
+  "itemType": "movie",
+  "addedAt": {
+    "$date": "2024-07-26T08:25:08.829Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a36068664a7015add30d59"
+  },
+  "userId": {
+    "$oid": "6693f6a38411ec24d6d34c29"
+  },
+  "itemId": "1396",
+  "itemType": "tv",
+  "addedAt": {
+    "$date": "2024-07-26T08:38:00.107Z"
+  },
+  "__v": 0
+}]

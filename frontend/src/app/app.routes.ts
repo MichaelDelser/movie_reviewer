@@ -34,6 +34,8 @@ export const routes: Routes = [
   { path: 'admin/users', component: AdminUsersComponent, canActivate: [RoleGuard] },
   // Admin user creation/edit route
   { path: 'admin/user-profile', component: AdminUserProfileComponent, canActivate: [RoleGuard] },
+  // Admin user creation/edit route
+  { path: 'admin/user-profile/:id', component: AdminUserProfileComponent, canActivate: [RoleGuard] },
   // Admin movie settings route
   { path: 'admin/movies', component: AdminMoviesComponent, canActivate: [RoleGuard] },
   // Default route

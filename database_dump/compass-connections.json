@@ -1,0 +1,27 @@
+{
+  "type": "Compass Connections",
+  "version": {
+    "$numberInt": "1"
+  },
+  "connections": [
+    {
+      "id": "dbe03db4-2f04-4226-a3fd-bc25d7351fab",
+      "lastUsed": {
+        "$date": {
+          "$numberLong": "1721988167075"
+        }
+      },
+      "favorite": {
+        "name": "screenjudge",
+        "color": "color1"
+      },
+      "savedConnectionType": "favorite",
+      "connectionOptions": {
+        "connectionString": "mongodb+srv://reviewServer:XZ6LIP3WEyR4OeFV@moviereviewer.7hbib0b.mongodb.net/?retryWrites=true&w=majority&appName=movieReviewer",
+        "oidc": {
+          "serializedState": "eyJvaWRjUGx1Z2luU3RhdGVWZXJzaW9uIjowLCJzdGF0ZSI6W119"
+        }
+      }
+    }
+  ]
+}

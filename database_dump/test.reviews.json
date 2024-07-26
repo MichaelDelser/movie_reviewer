@@ -1,0 +1,147 @@
+[{
+  "_id": {
+    "$oid": "66990eb95a7b884028ff907c"
+  },
+  "user_id": {
+    "$oid": "6691303ec1b3f08294e066ff"
+  },
+  "content_id": "519182",
+  "content_type": "Movie",
+  "title": "adawdad",
+  "content": "awdawdawdawdawdada",
+  "rating": 3,
+  "created_at": {
+    "$date": "2024-07-18T12:46:49.477Z"
+  },
+  "updated_at": {
+    "$date": "2024-07-18T17:11:52.492Z"
+  },
+  "__v": 0,
+  "helpfulness": 2
+},
+{
+  "_id": {
+    "$oid": "669fe315ab1f3b499f845eb1"
+  },
+  "user_id": {
+    "$oid": "6693f6a38411ec24d6d34c29"
+  },
+  "content_id": "63351",
+  "content_type": "TVShow",
+  "title": "adadadwda",
+  "content": "adwadawdwadawd",
+  "rating": 4,
+  "helpfulness": 1,
+  "created_at": {
+    "$date": "2024-07-23T17:06:29.487Z"
+  },
+  "updated_at": {
+    "$date": "2024-07-23T17:06:29.487Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a16e4fa5e8b211a2f2e3f9"
+  },
+  "user_id": {
+    "$oid": "6693f6a38411ec24d6d34c29"
+  },
+  "content_id": "519182",
+  "content_type": "Movie",
+  "title": "new review wawdawd",
+  "content": "",
+  "rating": 4,
+  "helpfulness": 13,
+  "created_at": {
+    "$date": "2024-07-24T21:12:47.567Z"
+  },
+  "updated_at": {
+    "$date": "2024-07-24T21:12:47.567Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a2bd5912196006e6736c2f"
+  },
+  "user_id": {
+    "$oid": "66a2bce512196006e6736c24"
+  },
+  "content_id": "58757",
+  "content_type": "Movie",
+  "title": "So ein schöner Film",
+  "content": "Des hen meine Kender emmer bei dr Oma ogugua dirfa.",
+  "rating": 9,
+  "helpfulness": 0,
+  "created_at": {
+    "$date": "2024-07-25T21:02:17.596Z"
+  },
+  "updated_at": {
+    "$date": "2024-07-25T21:02:17.596Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a2be6d12196006e6736c66"
+  },
+  "user_id": {
+    "$oid": "66a2bce512196006e6736c24"
+  },
+  "content_id": "852",
+  "content_type": "Movie",
+  "title": "Super spannend mit Heinz Rühmann und Gerd Fröbe",
+  "content": "Spannung pur nach einer Romanvorlage von Friedrich Dürrematt.",
+  "rating": 10,
+  "helpfulness": 0,
+  "created_at": {
+    "$date": "2024-07-25T21:06:53.156Z"
+  },
+  "updated_at": {
+    "$date": "2024-07-25T21:06:53.156Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a34ebb664a7015add30a22"
+  },
+  "user_id": {
+    "$oid": "66a34da0664a7015add30a0f"
+  },
+  "content_id": "597",
+  "content_type": "Movie",
+  "title": "What a Movie!",
+  "content": "This movie made me cry! Jack is so handsome when he was in the water It was the saddest moment in my life fr fr skull emoji :( \n9/10 Because I can't have Jack, great movie otherwise.",
+  "rating": 9,
+  "helpfulness": 0,
+  "created_at": {
+    "$date": "2024-07-26T07:22:35.891Z"
+  },
+  "updated_at": {
+    "$date": "2024-07-26T07:22:35.891Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66a35a4d664a7015add30bdb"
+  },
+  "user_id": {
+    "$oid": "6693f6a38411ec24d6d34c29"
+  },
+  "content_id": "597",
+  "content_type": "Movie",
+  "title": "A movie about a tragedy",
+  "content": "This cinematic piece reminds us once again of one of the greatest tragedies of the past. In 1912, through a series of unfortunate events one of the best icebergs I have ever seen was sunk by some ship, You should've seen the ice, it was clear as glass, white like fresh snow on a christmas morning and im sure there were some Penguins there too that lost their homes on that fateful day. This movie does a phenomenal job at protraying the horror this beauriful iceberg experienced in its last hours before its demise. I was moved to tears hearing the screetching of the metal into the ices smooth surface... lets all remember this so no icebergs are harmed again in the future",
+  "rating": 8,
+  "helpfulness": 0,
+  "created_at": {
+    "$date": "2024-07-26T08:11:57.475Z"
+  },
+  "updated_at": {
+    "$date": "2024-07-26T08:11:57.475Z"
+  },
+  "__v": 0
+}]
