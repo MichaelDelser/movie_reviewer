@@ -40,7 +40,7 @@
 
   <div *ngIf="isAuthenticated() && !hasWrittenReview" class="add-review">
     <h3>Add a Review</h3>
-    <input type="text" [(ngModel)]="newReviewTitle" placeholder="Review Title">
+    <input type="text" [(ngModel)]="newReviewTitle" placeholder="Review Title*">
     <div class="stars" (mouseleave)="resetStars()">
       <ng-container *ngFor="let star of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; let i = index">
         <span class="star"
@@ -49,7 +49,7 @@
               (click)="setRating(i + 1)">★</span>
       </ng-container>
     </div>
-    <textarea [(ngModel)]="newReview" placeholder="Add a review..."></textarea>
+    <textarea [(ngModel)]="newReview" placeholder="Add a review...(optional)"></textarea>
     <button class="submit-button" (click)="addReview()">Submit</button>
   </div>
 </div>

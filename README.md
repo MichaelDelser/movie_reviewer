@@ -291,7 +291,8 @@ heroku config:set KEY=VALUE
       - Below the details, there is a reviews section
     - Reviews
   ![img_7.png](img_7.png)
-      - Users can see 
+      - Browsers can see existing comments, a review consists of the title, th rating displayed as colored stars and the optional review text. An extra feature is the upvote system where users can upvote reviews if they found it helpful. Browsers can see these upvotes too
+      - Users can additionally Upvote existing movies that were created by other users. They can also add their own review to a movie. 
     - Favourites
     - Watchlist
 - A
